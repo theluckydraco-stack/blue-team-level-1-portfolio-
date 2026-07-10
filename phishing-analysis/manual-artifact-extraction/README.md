@@ -64,6 +64,32 @@ Get-FileHash ".\Apply Music Invoice 13313a.docx" -Algorithm SHA256
 
 The email used Netflix branding and an account-lock message to pressure the recipient into selecting a link. The visible sender domain, `netflixxuk.com`, differed from Netflix's legitimate domain. The embedded link also directed the recipient to an unrelated external domain.
 
+#### Evidence
+
+**Email appearance**
+
+![Email One appearance](email-one.png)
+
+**Header fields**
+
+![Email One header fields](email-one-header.png)
+
+**Date and time**
+
+![Email One date and time](email-one-date-time.png)
+
+**Sending server IP address**
+
+![Email One sending server IP](email-one-sender-ip.png)
+
+**Reverse DNS lookup**
+
+![Email One reverse DNS lookup](email-one-reverse-dns.png)
+
+**Safe URL extraction**
+
+![Email One URL extraction](email-one-url-extraction.png)
+
 ### Email Two — Apple invoice impersonation
 
 | Artifact | Value |
@@ -80,18 +106,27 @@ The email used Netflix branding and an account-lock message to pressure the reci
 
 The email used Apple-themed invoice content to create concern about an unfamiliar purchase and encouraged the recipient to inspect an attached Word document. The display name referenced Apple, but the actual sender used an Outlook address.
 
-## Evidence
+#### Evidence
 
-Screenshots document the following steps:
+**Email appearance and attachment**
 
-- Raw email header inspection
-- Sending server IP extraction
-- Reverse DNS lookup
-- Safe hyperlink extraction
-- Attachment identification
-- MD5 and SHA256 hash generation
+![Email Two appearance and attachment](email-two.png)
 
-> Evidence images will be stored in the `images` directory for this project.
+**Header fields**
+
+![Email Two header fields](email-two-header.png)
+
+**Sending server IP address**
+
+![Email Two sending server IP](email-two-sender-ip.png)
+
+**Reverse DNS lookup**
+
+![Email Two reverse DNS lookup](email-two-reverse-dns.png)
+
+**MD5 and SHA256 hashes**
+
+![Email Two file hashes](email-two-file-hashes.png)
 
 ## Skills Demonstrated
 
