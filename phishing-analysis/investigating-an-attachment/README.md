@@ -69,7 +69,7 @@ I opened Chrome Developer Tools, selected the Network panel, entered the lab pas
 | Attachment filename | `MICROINV-US1070822.html` |
 | File type | HTML document (`.html`) |
 | File size | `14.6 KB` (`14,960 bytes`) |
-| SHA256 | **Pending confirmation** |
+| SHA256 | `0FC57290189ADECFE17F6BACBC515ED080CD63C54B282FDEF4EF3DFC598CDD1E` |
 | Impersonated organization | Microsoft |
 | Targeted recipient | `contact@securityblue.team` |
 | Microsoft logo filename | `microsoft_logo_ee5c8d9fb6248c938fd0dc19370e90bd.svg` |
