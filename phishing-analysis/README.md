@@ -24,7 +24,9 @@ I manually extracted email, web, and file artifacts from two safe phishing email
 
 ### Investigating an Attachment
 
-In progress.
+I investigated an HTML credential-harvesting attachment, decoded its source code, identified the Microsoft impersonation, and traced the credential-submission request with Chrome Developer Tools.
+
+[View project](investigating-an-attachment/README.md)
 
 ### Phishing Response Challenge
 
