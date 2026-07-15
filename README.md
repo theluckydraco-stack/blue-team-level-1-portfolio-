@@ -16,19 +16,19 @@ Each project documents the objective, tools used, investigation process, finding
 
 | Domain | Projects | Status |
 |---|---|---|
-| [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | In progress |
+| [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
 | Threat Intelligence | Projects to be added | In progress |
 | Digital Forensics | Projects to be added | In progress |
 | SIEM | Projects to be added | In progress |
 | Incident Response | Projects to be added | In progress |
 
-## Current Project
+## Latest Completed Domain
 
-### Phishing Response Challenge
+### Phishing Analysis
 
-I manually triaged five email samples, identified two malicious phishing emails, collected email, web, and file artifacts, assessed a malicious attachment hash with VirusTotal, and documented targeted defensive actions.
+I completed the phishing-analysis laboratory exercises covering manual email artifact extraction, credential-harvesting attachment investigation, phishing triage, malicious URL and attachment analysis, IOC collection, and defensive-response recommendations.
 
-[View the project report](phishing-analysis/phishing-response-challenge/README.md)
+[View the Phishing Analysis portfolio](phishing-analysis/README.md)
 
 ## Disclaimer
 
