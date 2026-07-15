@@ -1,5 +1,7 @@
 # Phishing Response Challenge
 
+**Status:** Completed
+
 ## Overview
 
 In this lab, I manually triaged five email samples to identify malicious messages, collect email, web, and file artifacts, assess the intent of each message, and recommend defensive actions. I identified Emails 1 and 3 as malicious. The remaining messages were classified as spam, scams, or marketing content rather than malware-delivery or credential-harvesting emails.
@@ -51,6 +53,20 @@ For the NHS-themed email, I identified the original attachment name and its supp
 | 4 | Newsletter / marketing spam | Branded marketing content with multiple links but no confirmed malicious behavior identified during triage |
 | 5 | Unwanted cryptocurrency marketing / spam | Misleading marketing language and an unusual Reply-To identity, but no confirmed malicious payload identified during triage |
 
+### Non-malicious email evidence
+
+**Email 2 — lottery scam / spam**
+
+![Email 2 lottery scam](Email%202.png)
+
+**Email 4 — newsletter / marketing email**
+
+![Email 4 newsletter](Email%204.png)
+
+**Email 5 — cryptocurrency marketing spam**
+
+![Email 5 cryptocurrency marketing](Email%205.png)
+
 # Malicious Email 1 — Amazon Impersonation
 
 ## Assessment
@@ -78,6 +94,24 @@ The URL included the recipient's email address as a parameter. This may have bee
 |---|---|
 | Full URL | `hxxp://id820update[.]refundsys59[.]co[.]uk/invoice103amz/index.php?email=jack[.]tractive@abcindustries[.]co[.]uk` |
 | Root domain | `refundsys59.co.uk` |
+
+## Evidence
+
+**Email appearance**
+
+![Email 1 Amazon impersonation](Email%20%231.png)
+
+**Raw header fields**
+
+![Email 1 header fields](Email%20%231%20Header%20info.png)
+
+**Sending server IP evidence**
+
+![Email 1 sending server IP](Sender%20IP%2C%20Email%20%231.png)
+
+**Full hyperlink destination in the email source**
+
+![Email 1 full URL](Email%20%231%2C%20Full%20URL.png)
 
 ## Analysis Activities and Results
 
@@ -134,6 +168,20 @@ The original attachment used a double extension, `.pdf.exe`, to make a Windows e
 | Original filename | `COVID19-Testing-Kit-2020.pdf.exe` |
 | File type indicated by extension | Windows executable (`.exe`) disguised with a PDF-style double extension |
 | SHA256 | `8B2E701E91101955C73865589A4C72999AEABC11043F712E05FDB1C17C4AB19A` |
+
+## Evidence
+
+**Email appearance and gateway replacement attachment**
+
+![Email 3 NHS impersonation](Email%20%233.png)
+
+**Raw header fields**
+
+![Email 3 header fields](Email%20%233%20Header%20info.png)
+
+**VirusTotal reputation result**
+
+![Email 3 VirusTotal result](Virus%20total-%20Email%20%233.png)
 
 ## Analysis Activities and Results
 
