@@ -16,7 +16,7 @@ Each project documents the objective, tools used, investigation process, finding
 
 | Domain | Projects | Status |
 |---|---|---|
-| [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), Investigating an Attachment, Phishing Response Challenge | In progress |
+| [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | In progress |
 | Threat Intelligence | Projects to be added | In progress |
 | Digital Forensics | Projects to be added | In progress |
 | SIEM | Projects to be added | In progress |
@@ -24,11 +24,11 @@ Each project documents the objective, tools used, investigation process, finding
 
 ## Current Project
 
-### Manual Artifact Extraction
+### Phishing Response Challenge
 
-I manually extracted email, web, and file artifacts from safe phishing email samples using Mozilla Thunderbird, Sublime Text, DomainTools, and Windows PowerShell.
+I manually triaged five email samples, identified two malicious phishing emails, collected email, web, and file artifacts, assessed a malicious attachment hash with VirusTotal, and documented targeted defensive actions.
 
-[View the project report](phishing-analysis/manual-artifact-extraction/README.md)
+[View the project report](phishing-analysis/phishing-response-challenge/README.md)
 
 ## Disclaimer
 
