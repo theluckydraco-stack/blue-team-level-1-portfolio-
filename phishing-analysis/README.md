@@ -30,4 +30,6 @@ I investigated an HTML credential-harvesting attachment, decoded its source code
 
 ### Phishing Response Challenge
 
-In progress.
+I manually triaged five email samples, identified two malicious phishing emails, collected email, web, and file artifacts, used VirusTotal to assess a malicious attachment hash, and proposed targeted defensive actions.
+
+[View project](phishing-response-challenge/README.md)
