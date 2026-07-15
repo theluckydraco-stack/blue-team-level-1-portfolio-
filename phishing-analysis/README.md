@@ -1,5 +1,7 @@
 # Phishing Analysis
 
+**Status:** Completed
+
 This section documents practical phishing investigation exercises completed during my Blue Team Level 1 training.
 
 The projects cover:
@@ -14,7 +16,7 @@ The projects cover:
 - Defensive response actions
 - Phishing incident reporting
 
-## Projects
+## Completed Projects
 
 ### Manual Artifact Extraction
 
@@ -33,3 +35,7 @@ I investigated an HTML credential-harvesting attachment, decoded its source code
 I manually triaged five email samples, identified two malicious phishing emails, collected email, web, and file artifacts, used VirusTotal to assess a malicious attachment hash, and proposed targeted defensive actions.
 
 [View project](phishing-response-challenge/README.md)
+
+## Domain Outcome
+
+I completed the phishing-analysis laboratory exercises and demonstrated the ability to manually inspect email evidence, distinguish malicious phishing from spam and marketing content, collect and analyze artifacts, investigate suspicious links and attachments, and recommend proportionate defensive actions.
