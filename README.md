@@ -17,7 +17,7 @@ Each project documents the objective, tools used, investigation process, finding
 | Domain | Projects | Status |
 |---|---|---|
 | [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
-| [Threat Intelligence](threat-intelligence/README.md) | [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Project completed** |
+| [Threat Intelligence](threat-intelligence/README.md) | [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Core project and detection extension completed** |
 | Digital Forensics | Projects to be added | In progress |
 | SIEM | Projects to be added | In progress |
 | Incident Response | Projects to be added | In progress |
@@ -28,7 +28,19 @@ Each project documents the objective, tools used, investigation process, finding
 
 I completed a cyber-threat-intelligence assessment of threats affecting banks, payment processors, fintech platforms, cryptocurrency services and their technology providers.
 
-The project compares current and historical threat activity, maps attacker behaviour to MITRE ATT&CK, connects technical evidence to strategic context, and produces practical detection priorities for a financial SOC. It covers identity compromise, cloud and SaaS abuse, direct financial theft, third-party exploitation, data-theft extortion, payment-system risk and operational resilience.
+The project compares current and historical activity, maps attacker behaviour to MITRE ATT&CK, connects technical evidence to strategic context and produces practical detection specifications for a financial SOC.
+
+It covers:
+
+- direct financial and virtual-asset theft;
+- identity recovery, help-desk and SaaS compromise;
+- business email compromise and payment diversion;
+- customer-support insider risk;
+- third-party and enterprise-software exploitation;
+- data-theft extortion;
+- DDoS and operational resilience;
+- cloud, virtualisation and recovery-system risk;
+- DORA, MISP, STIX/TAXII, Sigma and other current professional practices.
 
 [View the Threat Intelligence project](threat-intelligence/financial-sector-threat-landscape/README.md)
 
