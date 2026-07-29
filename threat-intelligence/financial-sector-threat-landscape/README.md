@@ -2,63 +2,75 @@
 
 ## Project Status
 
-**In progress — APT41, DPRK and Scattered Spider baselines complete; CL0P research next**
+**In progress — four current threat profiles completed; historical regional comparison next**
 
 ## Problem Statement
 
-Modern financial services are no longer contained inside traditional bank servers. Banks, payment processors, fintech platforms and cryptocurrency services depend on cloud identity, SaaS applications, virtualisation, APIs, outsourced service desks, software vendors and other third parties.
+Modern financial services are not contained inside traditional bank servers. Banks, payment processors, fintech platforms and cryptocurrency services depend on cloud accounts, online business applications, virtualisation, APIs, outsourced service desks, software vendors and other third parties.
 
-A purely technical report can explain which malware or ATT&CK technique was observed, but it may still fail to explain why the victim was selected, why the activity occurred at that time, which wider objective it may support, or what the activity means to operational and strategic decision-makers.
+A report that only lists malware, IP addresses or MITRE ATT&CK techniques may still fail to answer the questions that matter:
 
-This project therefore combines technical cyber-threat intelligence with strategic context. It connects observable behaviour to victim selection, timing, motivation, sponsor-linked interests, business impact and defensive decisions while clearly separating sourced facts from analytical judgement.
+- Why was this organisation or employee targeted?
+- What did the attacker want to achieve?
+- Which business dependency made the attack possible?
+- What evidence should a SOC collect?
+- What should security leaders change?
 
-## Intended Audiences
+I am therefore building a threat-intelligence assessment that connects technical activity to victim selection, timing, motivation, business impact and defensive decisions.
 
-The project produces two connected views:
+## Who This Is Written For
 
-1. **SOC and incident-response view** — attack paths, ATT&CK techniques, telemetry, detections, hunting opportunities and containment priorities.
-2. **Strategic stakeholder view** — actor motivation, victimology, geopolitical or criminal context, business exposure, third-party consequences and confidence-qualified implications.
+The project is designed for two audiences:
+
+1. **SOC and incident-response readers** — people who need attack paths, logs, detections, hunting ideas and containment priorities.
+2. **Security leaders and business stakeholders** — people who need to understand motivation, financial exposure, third-party consequences and the confidence behind each assessment.
+
+Technical terms are explained briefly when they first appear. A fuller glossary is available in the [Reader Guide](methodology/reader-guide.md).
+
+## How to Read the Actor Names
+
+Security companies often assign different names to partly overlapping activity. These names are working intelligence labels, not automatically the legal names of fixed organisations.
+
+For this project:
+
+- an **actor or activity cluster** is a set of incidents researchers believe are related;
+- an **actor family** groups related source-specific labels without claiming they are identical;
+- an **extortion brand** is a public name used to threaten victims or publish stolen data and may be used by changing operators.
+
+I preserve the name used by each source and explain uncertainty where definitions differ.
+
+## Why Each Profile Is Included
+
+| Priority | Profile | Plain-language reason for inclusion | Financial-sector relevance |
+|---:|---|---|---|
+| 1 | [DPRK financial-theft activity](actor-profiles/dprk-financial-theft.md) | North Korean operations have directly stolen money and virtual assets from banks, payment systems, cryptocurrency exchanges and their technology providers | Direct theft, cloud compromise, developer targeting, laundering, sanctions and remote-worker risk |
+| 2 | [Scattered Spider / UNC3944](actor-profiles/scattered-spider.md) | This financially motivated cluster often persuades help desks to reset accounts and MFA, then uses the stolen identity to access cloud and SaaS systems | Financial-services targeting, identity recovery, outsourced support, customer data and extortion |
+| 3 | [CL0P-branded mass exploitation](actor-profiles/clop.md) | These campaigns exploit widely used enterprise software, steal concentrated business data and extort many organisations at scale | Third-party exposure, managed file transfer, ERP systems, data theft and systemic supplier risk |
+| 4 | [APT41](actor-profiles/apt41.md) | I first encountered APT41 in a Blue Team Level 1 training exercise. I retained it as a comparison case because it shows how espionage, surveillance, public-facing exploitation and financially motivated activity can overlap | Useful comparison for strategic targeting, supply-chain risk and broad exploitation, but not ranked as the most active direct financial thief |
+
+Cobalt Group and Silence will be added as historical Eastern European banking comparisons. They are not placed above the current profiles because strong public evidence of substantial 2023–2026 activity must be demonstrated before they are treated as current priorities.
 
 ## Intelligence Requirements
 
 I aim to answer:
 
-1. Which threat actors or activity clusters are most relevant to digital financial services during 2023–2026?
-2. Which parts of the financial ecosystem do they target: banks, payments, fintech, cryptocurrency, cloud identity, SaaS or third parties?
-3. What motivates each actor and what operational, financial or strategic outcome are they pursuing?
-4. What does the timing and selection of victims suggest about the actor's priorities?
-5. Which real-world organisations, public events, government interests or criminal ecosystems are credibly connected to the activity?
-6. Which initial-access and post-compromise behaviours recur across the actor set?
-7. Which logs and telemetry would allow a financial SOC to detect those behaviours?
-8. Which controls would reduce risk across several attack models?
-9. Where do public sources disagree, and how confident should the assessment be?
+1. Which threat actors or attack models are most relevant to digital financial services during 2023–2026?
+2. Which parts of the ecosystem do they target: banks, payments, fintech, cryptocurrency, cloud identity, SaaS or third parties?
+3. What financial, criminal or strategic outcome are they pursuing?
+4. What does the timing and choice of victims suggest?
+5. Which real-world organisations, public events, government interests or criminal systems are credibly connected to the activity?
+6. Which attack behaviours recur across the profiles?
+7. Which logs would allow a financial SOC to detect those behaviours?
+8. Which controls reduce risk across several attack models?
+9. Where do sources disagree, and how confident should the assessment be?
 
 ## Scope
 
-- **Sector:** Banks, payment processors, fintech platforms, cryptocurrency exchanges and services, card-processing environments, SWIFT-connected organisations and financial technology providers
-- **Modern attack surface:** Cloud identity, SaaS, APIs, third-party integrations, outsourced IT and BPO services, virtualisation, edge devices, software supply chains and Web3 infrastructure
-- **Geography:** Europe, with Eastern Europe used as regional context rather than a constraint that overrides current relevance
-- **Current landscape:** 2023–2026
-- **Historical activity:** Included when required to explain an actor's development, sponsor relationship or recurring financial attack model
-
-## Relevance-Based Actor Set
-
-### Primary research actors
-
-1. **DPRK financial-theft activity** — direct theft from banks, payment systems, cryptocurrency exchanges and other virtual-asset infrastructure. Public labels such as APT38, BlueNoroff, TraderTraitor and UNC4899 are mapped source by source rather than treated as automatically identical.
-2. **Scattered Spider / UNC3944** — identity-focused intrusion, help-desk social engineering, MFA reset abuse, cloud and SaaS access, data theft and extortion, including documented financial-services targeting.
-3. **CL0P / FIN11-related activity** — exploitation of third-party enterprise software and mass data-theft extortion, used to study how one provider weakness creates downstream financial-sector exposure.
-
-### Secondary comparison actor
-
-4. **APT41** — retained because it is the BTL1 research actor and provides a strong case study in connecting technical behaviour with state-aligned collection priorities, surveillance-related victim selection, supply-chain compromise, public-facing exploitation and financially motivated activity. It is not assumed to be the most relevant current financial actor.
-
-### Historical regional context
-
-- **Cobalt Group** — strong historical relevance to banks, ATM systems, card processing, payment systems and SWIFT, particularly in Eastern Europe.
-- **Silence** — historical targeting of financial institutions in Eastern Europe and neighbouring regions.
-
-The final actor set may change if stronger current evidence changes the relevance assessment.
+- **Financial ecosystem:** Banks, payment processors, fintech platforms, cryptocurrency exchanges and services, card-processing environments, SWIFT-connected organisations and financial technology providers
+- **Modern attack surface:** Cloud identity, SaaS, APIs, third-party integrations, outsourced IT and business-process services, virtualisation, edge devices, software supply chains and Web3 infrastructure
+- **Geography:** Europe, with Eastern Europe used as regional context without allowing geography to override stronger current evidence
+- **Current period:** 2023–2026
+- **Historical activity:** Included when it explains an actor's development, a sponsor relationship or a recurring financial attack model
 
 ## Analytical Model
 
@@ -76,53 +88,58 @@ My confidence-qualified assessment
 Operational and strategic implications
 ```
 
-For example, targeting hotel reservation systems is not recorded only as database access. The analysis also considers the timing, the people expected to use the facility, the possible collection requirement, alternative explanations and what the case reveals about actor tasking.
+For example, targeting a hotel reservation database is not recorded only as database access. The analysis also asks who was expected to stay there, why travel information was valuable, what the publisher assessed, which alternative explanations remain and what the case teaches decision-makers.
 
-## Analytic Tradecraft Rules
+## Research Rules
 
-The project methodology is informed by recognised intelligence-analysis principles:
+- I separate **observed fact**, **publisher assessment** and **my judgement**.
+- I describe the evidence and source quality behind important conclusions.
+- I assign confidence and consider alternative explanations.
+- I explain new concepts in plain language.
+- I prioritise current financial-sector relevance over the order used in the training course.
+- I use MITRE ATT&CK to organise behaviour, not to prove attribution.
+- I name people and companies only when reliable public sources do so and preserve legal wording such as `alleged`, `charged` or `assessed`.
+- I do not merge overlapping actor labels without source-specific evidence.
+- I do not publish live malicious files, credentials, personal data or course assessment material.
 
-- Separate **observed fact**, **source assessment** and **my analytical judgement**.
-- Describe source quality and the evidence supporting each major conclusion.
-- Express uncertainty and assign confidence to important judgements.
-- Consider alternative explanations rather than forcing one attribution.
-- Explain why a finding matters to its intended audience.
-- Treat actor names as analytical activity clusters rather than automatically proven legal identities.
-- Name real individuals or companies only when reliable public sources do so, and preserve legal language such as `alleged`, `charged` or `assessed`.
-- Do not infer government direction solely from geography, language, infrastructure or one shared technique.
-- Record changes when newer evidence alters an earlier assessment.
+The detailed method is documented in the [Analytic Framework](methodology/analytic-framework.md).
 
-The detailed method is documented in [Analytic Framework](methodology/analytic-framework.md).
+## Completed Profiles and Case Studies
 
-## Current Deliverables
+### Current profiles
 
-- [APT41 comparison profile](actor-profiles/apt41.md) — baseline complete
-- [DPRK financial-theft profile](actor-profiles/dprk-financial-theft.md) — baseline complete
-- [DMM Bitcoin 2024 attack-path case study](campaign-analysis/dmm-bitcoin-2024.md)
-- [Bybit 2025 strategic and laundering case study](campaign-analysis/bybit-2025.md)
-- [Scattered Spider / UNC3944 profile](actor-profiles/scattered-spider.md) — baseline complete
-- [UNC3944 help-desk-to-SaaS attack-path case study](campaign-analysis/unc3944-helpdesk-to-saas.md)
-- [CL0P third-party compromise profile](actor-profiles/clop.md) — next research phase
-- Cobalt Group historical regional profile — planned
-- Silence historical regional profile — planned
+- [APT41 comparison profile](actor-profiles/apt41.md)
+- [DPRK financial-theft profile](actor-profiles/dprk-financial-theft.md)
+- [Scattered Spider / UNC3944 profile](actor-profiles/scattered-spider.md)
+- [CL0P-branded mass exploitation profile](actor-profiles/clop.md)
+
+### Campaign analysis
+
+- [DMM Bitcoin 2024 attack path](campaign-analysis/dmm-bitcoin-2024.md)
+- [Bybit 2025 theft and laundering context](campaign-analysis/bybit-2025.md)
+- [UNC3944 help-desk-to-SaaS attack path](campaign-analysis/unc3944-helpdesk-to-saas.md)
+- [MOVEit 2023 mass data-theft campaign](campaign-analysis/moveit-2023.md)
+- [Oracle E-Business Suite 2025 extortion campaign](campaign-analysis/oracle-ebs-2025.md)
+
+### Supporting analysis
+
 - [Actor comparison dataset](data/actor-comparison.csv)
 - [Research source log](data/source-log.csv)
 - [Strategic context register](data/strategic-context-register.csv)
 - [Common ATT&CK techniques](attack-mapping/common-techniques.md)
-- Cross-actor detection and threat-hunting recommendations — planned
-- Executive strategic assessment — planned
+- [Reader Guide](methodology/reader-guide.md)
 
-## Research Quality and Safety
+## Current Finding
 
-- I prioritise direct sector and time-period relevance over the order used in the BTL1 activity.
-- I use primary, governmental or authoritative sources where available.
-- I cross-check important attribution, victimology and motivation claims.
-- I do not merge overlapping DPRK, APT, UNC, FIN or vendor labels without source-specific evidence.
-- I include cloud, SaaS, identity, third-party, virtualisation and crypto/Web3 risks where evidence supports them.
-- I do not publish live malicious files, credentials, personal data or BTL1 assessment material.
+The strongest current risks are not limited to malware on bank workstations:
 
-## Current Phase
+```text
+Direct theft of funds and virtual assets
+Identity recovery and help-desk compromise
+Cloud and SaaS account takeover
+Trusted developer and supplier access
+Mass exploitation of internet-facing enterprise software
+Data theft followed by extortion
+```
 
-The Scattered Spider baseline now covers help-desk social engineering, MFA reset abuse, identity recovery, SSO expansion, cloud and SaaS access, virtualisation control, cloud-to-cloud exfiltration, employee intimidation, public legal allegations and financial-sector relevance.
-
-The next phase is CL0P-related third-party exploitation because it will test a different problem: how one vulnerable enterprise product can expose many downstream organisations without each victim being targeted individually.
+The next phase will add the historical Eastern European banking comparison and then produce cross-actor detection priorities and a final executive assessment.
