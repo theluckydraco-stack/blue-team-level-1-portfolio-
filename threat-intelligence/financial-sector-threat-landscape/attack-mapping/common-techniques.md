@@ -11,16 +11,16 @@ I use ATT&CK to answer two defensive questions:
 
 Technique overlap does **not** prove that two incidents were caused by the same actor.
 
-## Profiles Compared
+## Current Profiles Compared
 
 - **DPRK financial theft:** direct theft from banks and virtual-asset organisations, including cloud and developer targeting.
 - **Scattered Spider / UNC3944:** help-desk social engineering followed by identity, SaaS and virtualisation abuse.
 - **CL0P-branded mass exploitation:** exploitation of enterprise products such as MOVEit Transfer and Oracle E-Business Suite for data theft and extortion.
 - **APT41:** comparison case involving espionage, public-facing exploitation, cloud services and software supply-chain activity.
 
-`Yes` means the behaviour is supported by the sources selected for this project. `Limited` means the source describes related capability or evidence but the behaviour is not yet broad enough to use as a central comparison. A blank does not mean the actor has never used the technique.
+`Yes` means the behaviour is supported by the sources selected for this project. `Limited` means the source describes related capability or evidence but the behaviour is not broad enough to use as a central comparison. A blank does not mean the actor has never used the technique.
 
-## Comparison Table
+## Current-Threat Comparison
 
 | Technique ID | Technique | DPRK financial theft | Scattered Spider / UNC3944 | CL0P-branded activity | APT41 | Why it matters to financial services | Required telemetry | Detection or hunting idea |
 |---|---|---:|---:|---:|---:|---|---|---|
@@ -44,6 +44,24 @@ Technique overlap does **not** prove that two incidents were caused by the same 
 | `T1195.002` | Compromise Software Supply Chain | Yes |  |  | Yes | A compromised provider, package or deployment process can expose many downstream financial organisations | Vendor-risk, CI/CD, package, code-signing, deployment, integrity and endpoint logs | Detect unauthorised build changes, new dependencies, code-signing anomalies and downstream execution |
 | `T1550.002` | Pass the Hash |  |  |  | Yes | Stolen Windows authentication material can enable lateral movement without plaintext passwords | Windows authentication, EDR, domain-controller and lateral-movement telemetry | Hunt for abnormal NTLM use, remote service creation and privileged logons from unusual hosts |
 
+## Historical Banking Comparison
+
+Cobalt Group and Silence are included as historical Eastern European banking comparisons. Their strongest detailed public reporting is older, but the behaviours remain useful for testing whether a modern financial institution can detect movement from an employee workstation into money-moving systems.
+
+| Technique ID | Technique | Cobalt Group | Silence | Bank-specific importance | Required telemetry | Detection or hunting idea |
+|---|---|---:|---:|---|---|---|
+| `T1566.001` | Spearphishing Attachment | Yes | Yes | A malicious document can create the first foothold inside a trusted bank network | Email gateway, sandbox, Office and endpoint logs | Detect high-risk attachments followed by Office child processes or script execution |
+| `T1204.002` | User Execution: Malicious File | Yes | Yes | The attack often depends on an employee opening or enabling content | Endpoint process creation and user reports | Correlate file opening with PowerShell, cmd, mshta, cscript or unusual network connections |
+| `T1059.001` | PowerShell | Yes | Yes | PowerShell can download payloads and automate compromise while resembling administration | Script Block Logging, AMSI and EDR | Hunt for encoded commands, downloads and PowerShell launched by Office or HTML Help |
+| `T1003.001` | OS Credential Dumping: LSASS Memory | Yes | Yes | Privileged credentials may provide access to payment, ATM or administration systems | EDR, LSASS access and credential-protection telemetry | Alert on non-security processes opening LSASS or dumping memory |
+| `T1078` | Valid Accounts | Limited | Yes | Stolen accounts allow attacker actions to resemble authorised employee activity | Active Directory, VPN, RDP and application logs | Identify new host, time or system use by privileged accounts |
+| `T1021.001` | Remote Services: RDP | Yes | Yes | RDP can move the attacker from employee systems to banking administration environments | RDP authentication, session and source-host logs | Detect user workstations initiating privileged RDP sessions to restricted segments |
+| `T1046` | Network Service Discovery | Yes | Related network mapping | Attackers must locate payment, ATM, card-processing and SWIFT-connected systems | Network-flow, EDR and firewall logs | Detect scanning from ordinary user networks toward protected financial segments |
+| `T1219` / `T1072` | Remote Access or Deployment Tools | Yes | Yes | TeamViewer, Ammyy Admin, RAdmin and similar tools can provide persistent control | Software inventory, services, sessions and network logs | Alert on unapproved remote tools or use against payment and ATM hosts |
+| `T1113` | Screen Capture | Related tooling | Yes | Screens reveal applications, data and approval steps | EDR, suspicious capture APIs and file creation | Hunt for repeated screenshots on privileged financial workstations |
+| `T1125` | Video Capture |  | Yes | Recording employee activity can teach attackers how legitimate financial procedures work | EDR, recording processes, file growth and outbound transfer | Detect screen-recording software or video files on restricted systems |
+| `T1195.002` | Compromise Software Supply Chain | Yes |  | A trusted software update can provide access to several financial institutions | Vendor-risk, software integrity, code-signing and deployment logs | Detect unexpected update changes or new code-signing behaviour |
+
 ## Cross-Actor Defensive Themes
 
 ### 1. Protect identity recovery
@@ -62,9 +80,17 @@ Activity may occur inside SaaS, cloud storage, ERP or file-transfer platforms wi
 
 A wallet provider, payroll processor, managed file-transfer service or software vendor may hold the access or data the attacker actually needs.
 
-### 5. Detect behaviour, not only indicators
+### 5. Protect money-moving systems from ordinary workstations
 
-IP addresses, hashes and domains change quickly. Account recovery, web-shell creation, bulk application downloads and unusual cloud synchronisation are more durable hunting targets.
+The Cobalt Group and Silence cases show why employee compromise must not provide a path to ATM, payment, card-processing or SWIFT-connected environments.
+
+### 6. Correlate cyber and fraud evidence
+
+A remote session, credential alert or network scan may only become clearly malicious when connected to a fraudulent transfer, balance change, ATM cash-out or laundering activity.
+
+### 7. Detect behaviour, not only indicators
+
+IP addresses, hashes and domains change quickly. Account recovery, web-shell creation, screen recording, remote administration, bulk application downloads and unusual cloud synchronisation are more durable hunting targets.
 
 ## Evidence Basis
 
@@ -72,5 +98,7 @@ IP addresses, hashes and domains change quickly. Account recovery, web-shell cre
 - Scattered Spider / UNC3944 mappings use Mandiant, MITRE ATT&CK and government advisories.
 - CL0P mappings use Mandiant MOVEit reporting, the CISA/FBI advisory and Oracle/GTIG reporting on the 2025 Oracle EBS campaign.
 - APT41 mappings use Mandiant and MITRE ATT&CK reporting.
+- Cobalt Group mappings use MITRE ATT&CK, Europol and Group-IB reporting.
+- Silence mappings use MITRE ATT&CK, Kaspersky and Group-IB reporting.
 
 The rows do not mean every campaign or associated public label used every listed technique. ATT&CK names and identifiers will be checked again against the current version before the project is marked complete.
