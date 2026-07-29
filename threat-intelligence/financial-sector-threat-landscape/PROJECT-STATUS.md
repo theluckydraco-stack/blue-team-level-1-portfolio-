@@ -6,14 +6,16 @@
 
 - Intelligence requirements and financial-sector scope
 - Reader guide and analytic framework
-- Transparent relevance-scoring method
+- Transparent [relevance-scoring method](methodology/relevance-scoring.md)
 - Six actor or historical-comparison profiles
-- Ten campaign and incident analyses through 2026
+- Nine campaign and incident analyses through 2026
+- [Financial attack-model comparison](analysis/attack-model-comparison.md)
 - European financial-sector baseline
 - Executive assessment
-- Financial SOC telemetry catalogue
+- [Financial SOC telemetry catalogue](analysis/financial-soc-telemetry-catalogue.md)
 - DORA operational alignment
 - Modern standards and deprecated-concept review
+- [Skills demonstrated and honest limitations](analysis/skills-demonstrated.md)
 
 ### Detection engineering
 
@@ -39,7 +41,8 @@ The first hands-on validation package is ready:
 ```text
 lab-plans/windows-identity-correlation/
 ├── README.md
-└── run-lab.ps1
+├── run-lab.ps1
+└── evidence-template.md
 
 detections/sigma/
 ├── README.md
@@ -53,6 +56,8 @@ Event 4724 — password reset
         ↓
 Event 4728 — same account added to Finance-Admins-Lab
 ```
+
+Open the [Windows Identity Correlation Lab](lab-plans/windows-identity-correlation/README.md) for the safe execution steps.
 
 ## Why manual execution is now required
 
@@ -72,7 +77,7 @@ These cannot be truthfully created from public research alone.
 1. Run the safe PowerShell lab on the domain controller.
 2. Confirm Events 4724 and 4728 in Event Viewer.
 3. Review and redact the exported CSV.
-4. Send the event screenshots or parsed event fields for verification.
+4. Complete the [evidence template](lab-plans/windows-identity-correlation/evidence-template.md).
 5. Convert or recreate the Sigma correlation in the selected SIEM.
 6. Repeat the test and capture the alert.
 7. Mark the detection as `Validated in lab` only after the result is confirmed.
