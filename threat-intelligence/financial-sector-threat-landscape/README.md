@@ -6,6 +6,8 @@
 
 The project is maintained through a weekly financial-threat watch so credible new reporting can change actor rankings, attack models and detection priorities.
 
+[View the current project status and validation checkpoint](PROJECT-STATUS.md).
+
 ## Problem Statement
 
 Modern financial services are not contained inside traditional bank servers. Banks, payment processors, fintech platforms and cryptocurrency services depend on cloud accounts, online business applications, virtualisation, APIs, outsourced service desks, software vendors, open-source packages and other third parties.
@@ -114,6 +116,7 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 
 - [European financial-sector threat baseline](analysis/sector-threat-baseline.md)
 - [Executive assessment](analysis/executive-assessment.md)
+- [Financial attack-model comparison](analysis/attack-model-comparison.md)
 - [Cross-actor detection priorities for a financial SOC](analysis/cross-actor-detection-priorities.md)
 - [Financial SOC telemetry catalogue](analysis/financial-soc-telemetry-catalogue.md)
 - [Payment fraud and business email compromise](analysis/payment-fraud-and-bec.md)
@@ -125,6 +128,7 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 - [DORA operational alignment](analysis/dora-operational-alignment.md)
 - [Modern parallels, updates and deprecated concepts](analysis/modern-parallels-and-updates.md)
 - [Financial threat timeline — 2023 to 2026](analysis/campaign-timeline-2023-2026.md)
+- [Skills demonstrated and honest limitations](analysis/skills-demonstrated.md)
 
 ### Current profiles
 
@@ -153,6 +157,7 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 ### Detection engineering
 
 - [Financial SOC detection specifications](detections/README.md)
+- [Experimental Sigma rules](detections/sigma/README.md)
 - [Identity reset followed by SaaS exfiltration](detections/identity-reset-to-saas-exfiltration.md)
 - [Device-code OAuth token abuse](detections/device-code-oauth-token-abuse.md)
 - [Public application exploitation followed by a web shell](detections/public-app-exploitation-to-web-shell.md)
@@ -170,11 +175,13 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 
 - [MISP design for the financial threat landscape](platform-design/misp-financial-threat-model.md)
 - [Detection-validation roadmap](lab-plans/detection-validation-roadmap.md)
+- [Windows identity correlation lab](lab-plans/windows-identity-correlation/README.md)
 
 ### Supporting data and methodology
 
 - [Actor comparison dataset](data/actor-comparison.csv)
 - [Actor relevance scoring](data/relevance-scoring.csv)
+- [Financial attack-model dataset](data/attack-model-comparison.csv)
 - [Research source log](data/source-log.csv)
 - [Operational extension source log](data/operational-extension-source-log.csv)
 - [Strategic context register](data/strategic-context-register.csv)
@@ -212,7 +219,7 @@ The practical goal is not to predict the exact actor name that will attack next.
 
 The intelligence research, telemetry requirements and detection specifications are complete, but the detections have not yet been validated against a live or laboratory SIEM dataset.
 
-The next hands-on phase is defined in the [Detection Validation Roadmap](lab-plans/detection-validation-roadmap.md). The first practical target is local Windows account and privilege-change correlation using the existing Windows Server and Windows 11 lab, followed later by cloud identity and SaaS testing.
+The next hands-on phase is defined in the [Detection Validation Roadmap](lab-plans/detection-validation-roadmap.md). The first practical target is the [Windows identity correlation lab](lab-plans/windows-identity-correlation/README.md), which uses the existing Windows Server and Windows 11 environment before later cloud identity and SaaS testing.
 
 ## Maintenance
 
