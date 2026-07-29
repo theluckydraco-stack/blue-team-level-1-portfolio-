@@ -17,12 +17,12 @@ Each project documents the objective, tools used, investigation process, finding
 | Domain | Projects | Status |
 |---|---|---|
 | [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
-| [Threat Intelligence](threat-intelligence/README.md) | [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Core project and detection extension completed** |
+| [Threat Intelligence](threat-intelligence/README.md) | [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Research and detection design completed; lab validation next** |
 | Digital Forensics | Projects to be added | In progress |
 | SIEM | Projects to be added | In progress |
 | Incident Response | Projects to be added | In progress |
 
-## Latest Completed Project
+## Current Portfolio Project
 
 ### Digital Financial Services Threat Landscape
 
@@ -33,14 +33,22 @@ The project compares current and historical activity, maps attacker behaviour to
 It covers:
 
 - direct financial and virtual-asset theft;
-- identity recovery, help-desk and SaaS compromise;
+- identity recovery, help-desk, OAuth token and SaaS compromise;
 - business email compromise and payment diversion;
+- AI-assisted voice, video and identity impersonation;
 - customer-support insider risk;
-- third-party and enterprise-software exploitation;
+- third-party, ERP and managed-file-transfer exploitation;
+- developer and open-source package compromise;
+- malicious redirect infrastructure and financial brand impersonation;
 - data-theft extortion;
 - DDoS and operational resilience;
 - cloud, virtualisation and recovery-system risk;
+- a financial SOC telemetry catalogue;
+- twelve vendor-neutral detection specifications;
+- an experimental Sigma rule and safe Windows identity-correlation lab;
 - DORA, MISP, STIX/TAXII, Sigma and other current professional practices.
+
+The repository clearly separates completed intelligence and detection design from laboratory validation that has not yet been performed.
 
 [View the Threat Intelligence project](threat-intelligence/financial-sector-threat-landscape/README.md)
 
