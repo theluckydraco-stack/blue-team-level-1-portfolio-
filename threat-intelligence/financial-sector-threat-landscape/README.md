@@ -2,7 +2,7 @@
 
 ## Project Status
 
-**In progress — current and historical actor baselines complete; cross-actor detection analysis next**
+**Core assessment complete — maintained through a weekly financial-threat watch**
 
 ## Problem Statement
 
@@ -16,7 +16,7 @@ A report that only lists malware, IP addresses or MITRE ATT&CK techniques may st
 - What evidence should a SOC collect?
 - What should security leaders change?
 
-I am therefore building a threat-intelligence assessment that connects technical activity to victim selection, timing, motivation, business impact and defensive decisions.
+I developed this threat-intelligence assessment to connect technical activity to victim selection, timing, motivation, business impact and defensive decisions.
 
 ## Who This Is Written For
 
@@ -50,11 +50,11 @@ I preserve the name used by each source and explain uncertainty where definition
 | 5 | [Cobalt Group](actor-profiles/cobalt-group.md) | This historical cybercriminal operation moved from employee phishing into ATM, card-processing, payment and SWIFT-connected systems | Shows the complete path from workstation compromise to organised bank cash-out |
 | 6 | [Silence](actor-profiles/silence.md) | This historical banking actor recorded employee activity to learn how legitimate financial procedures worked before stealing money | Shows why process reconnaissance, screen recording and valid-account monitoring matter |
 
-Cobalt Group and Silence are not placed above the current profiles because the strongest detailed public reporting for their core campaigns is concentrated mainly in 2016–2020. They are included to preserve important Eastern European banking lessons without presenting them as the most active 2023–2026 threats.
+Cobalt Group and Silence are not placed above the current profiles because the strongest detailed public reporting for their core campaigns is concentrated mainly in 2016–2020. They preserve important Eastern European banking lessons without being presented as the most active 2023–2026 threats.
 
 ## Intelligence Requirements
 
-I aim to answer:
+I aimed to answer:
 
 1. Which threat actors or attack models are most relevant to digital financial services during 2023–2026?
 2. Which parts of the ecosystem do they target: banks, payments, fintech, cryptocurrency, cloud identity, SaaS or third parties?
@@ -106,7 +106,13 @@ For example, targeting a hotel reservation database is not recorded only as data
 
 The detailed method is documented in the [Analytic Framework](methodology/analytic-framework.md).
 
-## Completed Profiles and Case Studies
+## Completed Analysis
+
+### Final assessments
+
+- [European financial-sector threat baseline](analysis/sector-threat-baseline.md)
+- [Cross-actor detection priorities for a financial SOC](analysis/cross-actor-detection-priorities.md)
+- [Executive assessment](analysis/executive-assessment.md)
 
 ### Current profiles
 
@@ -129,7 +135,7 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 - [MOVEit 2023 mass data-theft campaign](campaign-analysis/moveit-2023.md)
 - [Oracle E-Business Suite 2025 extortion campaign](campaign-analysis/oracle-ebs-2025.md)
 
-### Supporting analysis
+### Supporting data and methodology
 
 - [Actor comparison dataset](data/actor-comparison.csv)
 - [Research source log](data/source-log.csv)
@@ -137,7 +143,7 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 - [Common ATT&CK techniques](attack-mapping/common-techniques.md)
 - [Reader Guide](methodology/reader-guide.md)
 
-## Current Finding
+## Final Finding
 
 The strongest financial-sector risks are not limited to malware on bank workstations:
 
@@ -150,8 +156,12 @@ Mass exploitation of internet-facing enterprise software
 Data theft followed by extortion
 Movement from employee systems into ATM and payment infrastructure
 Observation of legitimate employee procedures before fraud
+Attacks on virtualisation, identity and recovery systems
+Availability attacks and geopolitically linked disruption
 ```
 
-## Current Phase
+The practical goal is not to predict the exact actor name that will attack next. It is to ensure that a financial institution can detect and contain the access paths that the most relevant attackers repeatedly use.
 
-The actor and campaign baselines are now complete. The next phase will convert the research into a short set of cross-actor detection priorities for a financial SOC and a final executive assessment for security leadership.
+## Maintenance
+
+A weekly threat watch reviews authoritative reporting for developments that could change the actor ranking, attack models, detection priorities or strategic conclusions. Material changes will be incorporated with source and confidence notes.
