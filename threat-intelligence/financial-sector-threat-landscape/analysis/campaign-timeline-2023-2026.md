@@ -74,6 +74,30 @@ Europol published a position paper highlighting the cross-border impact of calle
 
 ## 2026
 
+### UNC1069 targets cryptocurrency with AI-supported social engineering
+
+Mandiant reported an intrusion against a cryptocurrency-sector fintech entity involving a compromised Telegram account, fake Zoom meeting, ClickFix instruction and reported AI-generated video.
+
+**Why it matters:** modern phishing may arrive through a trusted messaging account and meeting rather than a suspicious attachment. The user can be persuaded to execute the command themselves.
+
+### Axios open-source supply-chain compromise
+
+Google Threat Intelligence reported that the axios maintainer account was compromised and malicious releases introduced the `plain-crypto-js` dependency to deploy WAVESHAPER.V2 across Windows, macOS and Linux.
+
+**Why it matters:** one maintainer account and one popular package can expose developer systems, build pipelines and downstream financial applications at scale.
+
+### Kali365 Microsoft 365 token phishing
+
+The FBI warned that Kali365 PhaaS uses device codes to obtain Microsoft 365 access and refresh tokens without collecting the victim's password.
+
+**Why it matters:** a legitimate Microsoft verification page can be part of the phishing chain. Password reset alone may not remove token-based access.
+
+### Exploitation before patch availability
+
+Mandiant reported a mean time-to-exploit of negative seven days in its M-Trends 2026 data. GTIG also reported an AI-assisted zero-day exploit assessment.
+
+**Why it matters:** financial organisations need inventory, segmentation, application logging and retrospective hunting before and after patch deployment.
+
 ### ATT&CK v19
 
 MITRE split the former Enterprise Defense Evasion tactic into Stealth and Defense Impairment.
@@ -105,16 +129,17 @@ Trusted developers, identity and availability become central
 Large virtual-asset theft, insider-enabled fraud and ERP extortion
         ↓
 2026
-More structured CTI, updated ATT&CK and selective phishing delivery
+Token phishing, AI-supported lures, open-source supply-chain compromise
+and faster exploitation
 ```
 
 ## Overall assessment
 
 The period shows a shift from defending individual endpoints toward defending **trust relationships and business services**:
 
-- trusted identities;
+- trusted identities and tokens;
 - support and recovery processes;
-- developers and suppliers;
+- developers, package maintainers and suppliers;
 - cloud and SaaS sessions;
 - payment and transaction workflows;
 - enterprise applications;
