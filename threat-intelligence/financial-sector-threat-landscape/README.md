@@ -2,7 +2,7 @@
 
 ## Project Status
 
-**In progress — strategic and technical intelligence framework established**
+**In progress — APT41 and DPRK baselines complete; Scattered Spider research next**
 
 ## Problem Statement
 
@@ -14,7 +14,7 @@ This project therefore combines technical cyber-threat intelligence with strateg
 
 ## Intended Audiences
 
-The project will produce two connected views:
+The project produces two connected views:
 
 1. **SOC and incident-response view** — attack paths, ATT&CK techniques, telemetry, detections, hunting opportunities and containment priorities.
 2. **Strategic stakeholder view** — actor motivation, victimology, geopolitical or criminal context, business exposure, third-party consequences and confidence-qualified implications.
@@ -45,7 +45,7 @@ I aim to answer:
 
 ### Primary research actors
 
-1. **DPRK financial-theft activity** — direct theft from banks, payment systems, cryptocurrency exchanges and other virtual-asset infrastructure. Public labels such as APT38, BlueNoroff and TraderTraitor will be mapped source by source rather than treated as automatically identical.
+1. **DPRK financial-theft activity** — direct theft from banks, payment systems, cryptocurrency exchanges and other virtual-asset infrastructure. Public labels such as APT38, BlueNoroff, TraderTraitor and UNC4899 are mapped source by source rather than treated as automatically identical.
 2. **Scattered Spider / UNC3944** — identity-focused intrusion, help-desk social engineering, MFA reset abuse, cloud and SaaS access, data theft and extortion, including documented financial-services targeting.
 3. **CL0P / FIN11-related activity** — exploitation of third-party enterprise software and mass data-theft extortion, used to study how one provider weakness creates downstream financial-sector exposure.
 
@@ -62,7 +62,7 @@ The final actor set may change if stronger current evidence changes the relevanc
 
 ## Analytical Model
 
-Each major claim will move through the following chain:
+Each major claim moves through the following chain:
 
 ```text
 Technical observation
@@ -94,31 +94,34 @@ The project methodology is informed by recognised intelligence-analysis principl
 
 The detailed method is documented in [Analytic Framework](methodology/analytic-framework.md).
 
-## Planned Deliverables
+## Current Deliverables
 
-- [APT41 comparison profile](actor-profiles/apt41.md)
-- [DPRK financial-theft profile](actor-profiles/dprk-financial-theft.md)
-- [Scattered Spider / UNC3944 profile](actor-profiles/scattered-spider.md)
-- [CL0P third-party compromise profile](actor-profiles/clop.md)
-- Cobalt Group historical regional profile
-- Silence historical regional profile
+- [APT41 comparison profile](actor-profiles/apt41.md) — baseline complete
+- [DPRK financial-theft profile](actor-profiles/dprk-financial-theft.md) — baseline complete
+- [DMM Bitcoin 2024 attack-path case study](campaign-analysis/dmm-bitcoin-2024.md)
+- [Bybit 2025 strategic and laundering case study](campaign-analysis/bybit-2025.md)
+- [Scattered Spider / UNC3944 profile](actor-profiles/scattered-spider.md) — next research phase
+- [CL0P third-party compromise profile](actor-profiles/clop.md) — planned
+- Cobalt Group historical regional profile — planned
+- Silence historical regional profile — planned
 - [Actor comparison dataset](data/actor-comparison.csv)
 - [Research source log](data/source-log.csv)
 - [Strategic context register](data/strategic-context-register.csv)
 - [Common ATT&CK techniques](attack-mapping/common-techniques.md)
-- Financial-sector attack-path analysis
-- Detection and threat-hunting recommendations
-- Executive strategic assessment
+- Cross-actor detection and threat-hunting recommendations — planned
+- Executive strategic assessment — planned
 
 ## Research Quality and Safety
 
-- I will prioritise direct sector and time-period relevance over the order used in the BTL1 activity.
-- I will use primary, governmental or authoritative sources where available.
-- I will cross-check important attribution, victimology and motivation claims.
-- I will not merge overlapping DPRK, APT, UNC, FIN or vendor labels without source-specific evidence.
-- I will include cloud, SaaS, identity, third-party, virtualisation and crypto/Web3 risks where evidence supports them.
-- I will not publish live malicious files, credentials, personal data or BTL1 assessment material.
+- I prioritise direct sector and time-period relevance over the order used in the BTL1 activity.
+- I use primary, governmental or authoritative sources where available.
+- I cross-check important attribution, victimology and motivation claims.
+- I do not merge overlapping DPRK, APT, UNC, FIN or vendor labels without source-specific evidence.
+- I include cloud, SaaS, identity, third-party, virtualisation and crypto/Web3 risks where evidence supports them.
+- I do not publish live malicious files, credentials, personal data or BTL1 assessment material.
 
 ## Current Phase
 
-The APT41 baseline has been expanded to include strategic context, surveillance-related victimology, publicly identified personas, government allegations, confidence and alternative explanations. The next research phase will apply the same framework to the primary actor set.
+The DPRK baseline now covers direct financial theft, cloud compromise, developer social engineering, third-party wallet infrastructure, session theft, laundering, IT-worker expansion into Europe, strategic state-revenue context, detection opportunities and business implications.
+
+The next phase is Scattered Spider / UNC3944 because it provides the strongest identity, help-desk, SaaS and virtualisation comparison for a modern financial SOC.
