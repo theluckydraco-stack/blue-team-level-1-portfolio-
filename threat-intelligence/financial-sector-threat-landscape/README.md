@@ -2,7 +2,7 @@
 
 ## Project Status
 
-**In progress — four current threat profiles completed; historical regional comparison next**
+**In progress — current and historical actor baselines complete; cross-actor detection analysis next**
 
 ## Problem Statement
 
@@ -47,8 +47,10 @@ I preserve the name used by each source and explain uncertainty where definition
 | 2 | [Scattered Spider / UNC3944](actor-profiles/scattered-spider.md) | This financially motivated cluster often persuades help desks to reset accounts and MFA, then uses the stolen identity to access cloud and SaaS systems | Financial-services targeting, identity recovery, outsourced support, customer data and extortion |
 | 3 | [CL0P-branded mass exploitation](actor-profiles/clop.md) | These campaigns exploit widely used enterprise software, steal concentrated business data and extort many organisations at scale | Third-party exposure, managed file transfer, ERP systems, data theft and systemic supplier risk |
 | 4 | [APT41](actor-profiles/apt41.md) | I first encountered APT41 in a Blue Team Level 1 training exercise. I retained it as a comparison case because it shows how espionage, surveillance, public-facing exploitation and financially motivated activity can overlap | Useful comparison for strategic targeting, supply-chain risk and broad exploitation, but not ranked as the most active direct financial thief |
+| 5 | [Cobalt Group](actor-profiles/cobalt-group.md) | This historical cybercriminal operation moved from employee phishing into ATM, card-processing, payment and SWIFT-connected systems | Shows the complete path from workstation compromise to organised bank cash-out |
+| 6 | [Silence](actor-profiles/silence.md) | This historical banking actor recorded employee activity to learn how legitimate financial procedures worked before stealing money | Shows why process reconnaissance, screen recording and valid-account monitoring matter |
 
-Cobalt Group and Silence will be added as historical Eastern European banking comparisons. They are not placed above the current profiles because strong public evidence of substantial 2023–2026 activity must be demonstrated before they are treated as current priorities.
+Cobalt Group and Silence are not placed above the current profiles because the strongest detailed public reporting for their core campaigns is concentrated mainly in 2016–2020. They are included to preserve important Eastern European banking lessons without presenting them as the most active 2023–2026 threats.
 
 ## Intelligence Requirements
 
@@ -113,6 +115,12 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 - [Scattered Spider / UNC3944 profile](actor-profiles/scattered-spider.md)
 - [CL0P-branded mass exploitation profile](actor-profiles/clop.md)
 
+### Historical banking profiles
+
+- [Cobalt Group](actor-profiles/cobalt-group.md)
+- [Silence](actor-profiles/silence.md)
+- [Historical Eastern European bank-intrusion comparison](campaign-analysis/eastern-european-bank-intrusions.md)
+
 ### Campaign analysis
 
 - [DMM Bitcoin 2024 attack path](campaign-analysis/dmm-bitcoin-2024.md)
@@ -131,7 +139,7 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 
 ## Current Finding
 
-The strongest current risks are not limited to malware on bank workstations:
+The strongest financial-sector risks are not limited to malware on bank workstations:
 
 ```text
 Direct theft of funds and virtual assets
@@ -140,6 +148,10 @@ Cloud and SaaS account takeover
 Trusted developer and supplier access
 Mass exploitation of internet-facing enterprise software
 Data theft followed by extortion
+Movement from employee systems into ATM and payment infrastructure
+Observation of legitimate employee procedures before fraud
 ```
 
-The next phase will add the historical Eastern European banking comparison and then produce cross-actor detection priorities and a final executive assessment.
+## Current Phase
+
+The actor and campaign baselines are now complete. The next phase will convert the research into a short set of cross-actor detection priorities for a financial SOC and a final executive assessment for security leadership.
