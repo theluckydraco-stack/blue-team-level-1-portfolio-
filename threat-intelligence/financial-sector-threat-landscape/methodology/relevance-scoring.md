@@ -98,6 +98,14 @@ Maximum score: `35`
 
 These bands are a project decision aid, not an industry standard.
 
+## Recency gate
+
+A profile with a `Current activity` score of `0` or `1` cannot be presented as a primary current threat even when its historical impact and direct banking relevance produce a high total.
+
+It is labelled **historical comparator** until reliable current evidence changes the score.
+
+This prevents a famous older banking campaign from outranking a clearly active 2023–2026 threat merely because its historical losses were large.
+
 ## Current results
 
 The full scores are stored in [`data/relevance-scoring.csv`](../data/relevance-scoring.csv).
@@ -110,7 +118,7 @@ The result supports the current order:
 4. APT41 as a secondary comparison
 5. Cobalt Group and Silence as historical banking comparators
 
-Cobalt Group and Silence score strongly for direct banking relevance but lose priority because their strongest detailed public evidence is older than the project's current period.
+Cobalt Group and Silence score strongly for direct banking relevance but are moved into the historical tier by the recency gate because their strongest detailed public evidence is older than the project's current period.
 
 ## Safeguards against false precision
 
