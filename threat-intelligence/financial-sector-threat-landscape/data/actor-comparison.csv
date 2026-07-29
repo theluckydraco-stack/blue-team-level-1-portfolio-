@@ -1,0 +1,5 @@
+actor,mitre_id,associated_names,primary_motivation,secondary_motivation,documented_financial_targets,documented_regions,common_initial_access,selected_attack_techniques,financial_sector_relevance,confidence,status
+APT41,G0096,"Wicked Panda; Brass Typhoon; BARIUM","State-sponsored espionage","Financial gain","Finance listed among targeted sectors; specific financial cases require further research","Global; European relevance documented in broad campaigns","Exploit public-facing applications; phishing and valid accounts require campaign-specific verification","T1190; T1505.003; T1078; T1550.002; T1567.002","Comparison actor with documented financial-sector targeting and dual motivation",High,"Research in progress"
+Cobalt Group,,,,,,,,,,,"Not started"
+Silence,,,,,,,,,,,"Not started"
+APT38,,,,,,,,,,,"Not started"
