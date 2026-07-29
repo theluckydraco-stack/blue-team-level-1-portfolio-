@@ -27,6 +27,27 @@ Each specification therefore records:
 3. [Suspicious support-agent customer-data access](support-insider-data-access.md)
 4. [Payment-detail change and BEC correlation](payment-change-bec.md)
 5. [DDoS traffic correlated with service degradation](ddos-service-degradation.md)
+6. [Developer compromise leading to transaction manipulation](developer-to-transaction-compromise.md)
+7. [Bulk data collection followed by cloud exfiltration](bulk-data-to-cloud-exfiltration.md)
+8. [Virtualisation and recovery-control compromise](virtualisation-and-recovery-control.md)
+9. [Payment-system reconnaissance and operator imitation](payment-system-operator-imitation.md)
+
+## Coverage areas
+
+The specifications cover:
+
+```text
+Identity recovery
+Cloud and SaaS access
+Public application exploitation
+Third-party and support access
+Developer and CI/CD compromise
+Payment and beneficiary changes
+Data collection and exfiltration
+Virtualisation and recovery systems
+ATM, SWIFT and payment-operator activity
+DDoS and business-service availability
+```
 
 ## Development workflow
 
@@ -52,3 +73,4 @@ Periodic review
 - Thresholds are conceptual until a baseline is available.
 - Product-specific field mappings are not included.
 - The specifications describe defensive monitoring and are intended for authorised environments.
+- ATT&CK mappings organise behaviour but do not replace fraud, payment and business-process context.
