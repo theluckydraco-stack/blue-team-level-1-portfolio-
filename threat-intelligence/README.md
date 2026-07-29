@@ -14,18 +14,24 @@ The project includes:
 
 - current actor and attack-model profiles;
 - historical Eastern European banking comparisons;
-- financial-sector campaign and incident case studies;
+- financial-sector campaign and incident case studies through 2026;
 - source, confidence and alternative-hypothesis tracking;
+- a transparent actor-relevance scoring method;
 - MITRE ATT&CK behaviour mapping;
 - a European sector threat baseline;
-- BEC, insider-risk and DDoS analysis;
-- cross-actor financial SOC detection priorities;
-- vendor-neutral detection specifications;
+- BEC, insider-risk, AI impersonation and DDoS analysis;
+- Microsoft 365 token-phishing and malicious-redirect analysis;
+- developer, open-source package and transaction-workflow risk;
+- a financial SOC telemetry catalogue;
+- twelve vendor-neutral detection specifications;
+- an experimental Sigma correlation rule and safe Windows lab plan;
 - DORA operational alignment;
 - a MISP platform design;
 - modern updates covering STIX/TAXII, Sigma, RDAP, TLP 2.0, EPSS and ATT&CK v19;
 - a final executive assessment.
 
-The report explains technical concepts in plain language and connects attacker behaviour to identity, cloud, SaaS, suppliers, transaction systems, virtualisation, fraud and operational resilience.
+The report explains technical concepts in plain language and connects attacker behaviour to identity, tokens, cloud, SaaS, suppliers, open-source packages, transaction systems, virtualisation, fraud and operational resilience.
+
+The research and detection design are complete. Laboratory validation is clearly marked as the next stage rather than being claimed as finished work.
 
 [View the Digital Financial Services Threat Landscape](financial-sector-threat-landscape/README.md)
