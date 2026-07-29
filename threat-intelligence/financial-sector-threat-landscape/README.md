@@ -2,7 +2,7 @@
 
 ## Project Status
 
-**Core assessment complete — maintained through a weekly financial-threat watch**
+**Core assessment and first detection-engineering extension complete — maintained through a weekly financial-threat watch**
 
 ## Problem Statement
 
@@ -108,11 +108,16 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 
 ## Completed Analysis
 
-### Final assessments
+### Final and sector-wide assessments
 
 - [European financial-sector threat baseline](analysis/sector-threat-baseline.md)
-- [Cross-actor detection priorities for a financial SOC](analysis/cross-actor-detection-priorities.md)
 - [Executive assessment](analysis/executive-assessment.md)
+- [Cross-actor detection priorities for a financial SOC](analysis/cross-actor-detection-priorities.md)
+- [Payment fraud and business email compromise](analysis/payment-fraud-and-bec.md)
+- [DDoS and operational resilience](analysis/ddos-and-operational-resilience.md)
+- [From threat intelligence to detection](analysis/intelligence-to-detection-workflow.md)
+- [DORA operational alignment](analysis/dora-operational-alignment.md)
+- [Modern parallels, updates and deprecated concepts](analysis/modern-parallels-and-updates.md)
 
 ### Current profiles
 
@@ -127,19 +132,36 @@ The detailed method is documented in the [Analytic Framework](methodology/analyt
 - [Silence](actor-profiles/silence.md)
 - [Historical Eastern European bank-intrusion comparison](campaign-analysis/eastern-european-bank-intrusions.md)
 
-### Campaign analysis
+### Campaign and incident analysis
 
 - [DMM Bitcoin 2024 attack path](campaign-analysis/dmm-bitcoin-2024.md)
 - [Bybit 2025 theft and laundering context](campaign-analysis/bybit-2025.md)
 - [UNC3944 help-desk-to-SaaS attack path](campaign-analysis/unc3944-helpdesk-to-saas.md)
 - [MOVEit 2023 mass data-theft campaign](campaign-analysis/moveit-2023.md)
 - [Oracle E-Business Suite 2025 extortion campaign](campaign-analysis/oracle-ebs-2025.md)
+- [Coinbase 2025 support-insider and customer-social-engineering case](campaign-analysis/coinbase-2025-support-insider-extortion.md)
+
+### Detection engineering
+
+- [Financial SOC detection specifications](detections/README.md)
+- [Identity reset followed by SaaS exfiltration](detections/identity-reset-to-saas-exfiltration.md)
+- [Public application exploitation followed by a web shell](detections/public-app-exploitation-to-web-shell.md)
+- [Suspicious support-agent customer-data access](detections/support-insider-data-access.md)
+- [Payment-detail change and BEC correlation](detections/payment-change-bec.md)
+- [DDoS traffic correlated with service degradation](detections/ddos-service-degradation.md)
+
+### Threat-intelligence platform design
+
+- [MISP design for the financial threat landscape](platform-design/misp-financial-threat-model.md)
 
 ### Supporting data and methodology
 
 - [Actor comparison dataset](data/actor-comparison.csv)
 - [Research source log](data/source-log.csv)
+- [Operational extension source log](data/operational-extension-source-log.csv)
 - [Strategic context register](data/strategic-context-register.csv)
+- [Operational context register](data/operational-context-register.csv)
+- [Detection coverage matrix](data/detection-coverage-matrix.csv)
 - [Common ATT&CK techniques](attack-mapping/common-techniques.md)
 - [Reader Guide](methodology/reader-guide.md)
 
@@ -154,10 +176,12 @@ Cloud and SaaS account takeover
 Trusted developer and supplier access
 Mass exploitation of internet-facing enterprise software
 Data theft followed by extortion
+Business email compromise and payment diversion
+Support-insider access used for customer fraud
 Movement from employee systems into ATM and payment infrastructure
 Observation of legitimate employee procedures before fraud
 Attacks on virtualisation, identity and recovery systems
-Availability attacks and geopolitically linked disruption
+DDoS and geopolitically linked disruption
 ```
 
 The practical goal is not to predict the exact actor name that will attack next. It is to ensure that a financial institution can detect and contain the access paths that the most relevant attackers repeatedly use.
@@ -165,3 +189,7 @@ The practical goal is not to predict the exact actor name that will attack next.
 ## Maintenance
 
 A weekly threat watch reviews authoritative reporting for developments that could change the actor ranking, attack models, detection priorities or strategic conclusions. Material changes will be incorporated with source and confidence notes.
+
+## Current Implementation Gap
+
+The intelligence research and detection designs are complete, but the specifications have not yet been validated against a live or laboratory SIEM dataset. The next hands-on phase will be controlled implementation and testing when suitable identity, endpoint, application or cloud logs are available.
