@@ -2,11 +2,13 @@
 
 ## Status
 
-**Research in progress**
+**Baseline complete — secondary comparison actor**
 
 ## Intelligence Relevance
 
-APT41 is the starting point for this project because it is the actor assigned in the BTL1 threat-actor research activity. The purpose of this profile is not to copy every technique or malware family associated with the group. It is to identify the behaviours and campaigns that matter to a financial-sector SOC.
+APT41 is included because it is the actor assigned in the BTL1 threat-actor research activity and because it demonstrates state espionage, financially motivated activity, exploitation of public-facing systems and supply-chain compromise.
+
+It is not treated as the main actor for this project. Its direct relevance to modern digital finance is lower than actors whose core activity centres on financial theft, cryptocurrency, cloud identity, SaaS abuse or third-party extortion.
 
 ## Verified Baseline
 
@@ -16,38 +18,43 @@ APT41 is the starting point for this project because it is the actor assigned in
 | Common associated names | Wicked Panda, Brass Typhoon, BARIUM |
 | Activity observed since | At least 2012 |
 | Broad assessment | China-linked state-sponsored espionage activity with separately documented financially motivated operations |
-| Documented sectors | Includes finance, healthcare, telecommunications, technology, education, retail, gaming, and others |
+| Documented sectors | Includes finance, healthcare, telecommunications, technology, education, retail, gaming and others |
+| Project role | Secondary comparison actor |
 | Current confidence | High confidence that the public APT41 cluster has documented espionage and financial activity; lower confidence should be used when mapping individual incidents or aliases without source-specific evidence |
 
-## Research Questions
+## Resolved Research Questions
 
-### 1. Identity and naming
+### Financially motivated activity
 
-- Which aliases are explicitly associated with APT41 by each source?
-- Do the sources describe complete overlap or only partial overlap?
-- Has the source changed its actor-naming convention?
+**Finding:** Mandiant reported that APT41's financially motivated activity primarily targeted the video-game industry. The group manipulated virtual currencies, attempted ransomware deployment, accessed game-production environments, stole source code and stole digital certificates that were later used to sign malware.
 
-### 2. Motivation
+**Source section:** `Who Does APT41 Target?`
 
-- Which campaigns are assessed as state-sponsored espionage?
-- Which activities are assessed as financially motivated?
-- Is the financial activity described as state-directed, tolerated, or conducted for personal gain?
+### Espionage activity
 
-### 3. Targeting
+**Finding:** Mandiant assessed that APT41's espionage targeting generally aligned with Chinese economic-development priorities. The group established strategic access in healthcare, high technology and telecommunications, while activity against higher education, travel and media also supported tracking and surveillance objectives. Examples included targeting telecom call-record information and hotel reservation systems.
 
-- Which financial organisations or financial processes have been targeted?
-- Which countries and regions are documented?
-- Is the evidence specific to European or Eastern European financial services, or only to finance globally?
+**Source section:** `Who Does APT41 Target?`
 
-### 4. Significant campaigns
+### Connection between the financial and espionage activity
 
-Record at least three campaigns that explain how APT41 operates. At least one should be recent, one should demonstrate exploitation of public-facing infrastructure, and one should demonstrate the dual espionage/financial character.
+**Finding:** Mandiant assessed that the same broader APT41 cluster conducted state-sponsored espionage and financially motivated activity in parallel. Supporting evidence included use of non-public malware associated with espionage in apparent personal-gain operations, simultaneous activity from 2014 onward, linked online personas, operational timing consistent with moonlighting, repeated gaming-sector targeting and shared technical capabilities.
+
+**Source sections:** Introductory assessment under `APT41: A Dual Espionage and Cyber Crime Operation`, `Probable Chinese Espionage Contractors`, and `Looking Ahead`
+
+### Financial-SOC assessment
+
+**Assessment:** A bank or fintech should not rank APT41 above actors dedicated to direct financial or virtual-asset theft solely because finance appears in its victim list. APT41 still matters as a comparison actor because it has targeted banking and finance during broad exploitation campaigns, moves quickly against vulnerable public-facing infrastructure, uses valid accounts and web shells, abuses legitimate cloud services for exfiltration, and has demonstrated supply-chain compromise. These behaviours affect internet-facing financial applications, third-party providers and cloud-connected environments even when direct financial theft is not the main objective.
+
+**Confidence:** Moderate to high. The behaviours and finance-sector targeting are well documented, but public evidence for recent, finance-specific European campaigns is limited compared with actors that specialise in this sector.
+
+## Significant Campaigns
 
 | Campaign | Period | Target or sector | Initial access | Objective | Significant activity | Source | Confidence |
 |---|---|---|---|---|---|---|---|
-| APT41 DUST | 2023–2024 | Multiple global sectors | To be confirmed from source | Long-term access and data theft | Web shells, DUSTPAN/DUSTTRAP, BEACON, cloud-based exfiltration | MITRE and Mandiant | High |
-| Global exploitation campaign | Jan–Mar 2020 | Included banking and finance | Exploitation of public-facing Citrix, Cisco, and Zoho systems | Broad access acquisition | Rapid exploitation of recently disclosed vulnerabilities | Mandiant | High |
-| Dual espionage and cybercrime activity | Historical | Multiple sectors including finance and gaming | To be researched | Espionage and financial gain | To be researched | Mandiant | High |
+| APT41 DUST | 2023–2024 | Multiple global sectors | Web-facing compromise and persistence mechanisms documented in incident reporting | Long-term access and data theft | Web shells, DUSTPAN/DUSTTRAP, BEACON, Cloudflare-based C2 and cloud-service exfiltration | MITRE and Mandiant | High |
+| Global exploitation campaign | Jan–Mar 2020 | Included banking and finance | Exploitation of Citrix, Cisco and Zoho public-facing systems | Broad access acquisition | Rapid use of recently disclosed vulnerabilities against more than 75 observed customer environments | Mandiant | High |
+| Dual espionage and cybercrime activity | Historical, including simultaneous activity from 2014 | Espionage across several strategic sectors; financial activity concentrated in gaming | Spearphishing, exploitation and campaign-specific methods | Strategic collection and personal financial gain | Virtual-currency manipulation, ransomware attempts, source-code and certificate theft, surveillance and supply-chain activity | Mandiant | High |
 
 ## Financial-Sector Relevance
 
@@ -55,12 +62,13 @@ Record at least three campaigns that explain how APT41 operates. At least one sh
 
 - MITRE lists finance among the sectors targeted by APT41.
 - Mandiant documented banking and finance among the sectors targeted during the 2020 global exploitation campaign.
+- APT41's exploitation of internet-facing systems, valid-account use, web shells, cloud-based exfiltration and supply-chain activity are relevant to financial institutions and their technology providers.
 
-### Questions still requiring evidence
+### Relevance limitation
 
-- Which specific financial institutions, payment systems, or financial processes have been publicly linked to APT41?
-- Which activity has direct European or Eastern European relevance?
-- Is APT41 a primary financial-sector threat in the selected geography, or mainly a comparison actor?
+- The strongest publicly documented financially motivated activity in the foundational Mandiant report focused on the video-game industry rather than banks or payment systems.
+- Public evidence does not make APT41 the strongest current actor for European or Eastern European digital finance during 2023–2026.
+- APT41 should therefore be compared with, rather than placed ahead of, DPRK financial-theft clusters, Scattered Spider/UNC3944 and third-party extortion actors.
 
 ## Selected ATT&CK Techniques
 
@@ -68,11 +76,12 @@ Only techniques that help explain financial-sector risk or provide useful detect
 
 | Technique ID | Technique | Observed procedure | Why it matters to a financial SOC | Required telemetry | Source |
 |---|---|---|---|---|---|
-| `T1190` | Exploit Public-Facing Application | APT41 has exploited vulnerable internet-facing applications, including Exchange, Citrix, Zoho, Log4j-affected applications, and other web applications | Internet-facing financial services and third-party systems are high-value entry points | WAF, reverse-proxy, application, vulnerability-management, EDR, and authentication logs | MITRE |
-| `T1505.003` | Server Software Component: Web Shell | APT41 has deployed web shells for persistence and command execution | Web shells can provide quiet, long-term access to exposed servers | Web-server file changes, process creation, web access, EDR, and integrity-monitoring logs | MITRE |
-| `T1078` | Valid Accounts | APT41 has used compromised credentials to access additional systems | Valid accounts can blend with normal employee or administrator activity | Identity-provider, VPN, Active Directory, cloud sign-in, and privileged-access logs | MITRE |
-| `T1550.002` | Use Alternate Authentication Material: Pass the Hash | APT41 has used captured password hashes for lateral movement | Financial networks often contain privileged Windows infrastructure and segmented systems | Windows authentication, EDR, lateral-movement, and privileged-account telemetry | MITRE |
-| `T1567.002` | Exfiltration Over Web Service: Exfiltration to Cloud Storage | APT41 DUST exfiltrated collected information to OneDrive | Legitimate cloud services may allow data theft to resemble normal traffic | Cloud access security, proxy, endpoint, Microsoft 365, and data-loss-prevention logs | MITRE |
+| `T1190` | Exploit Public-Facing Application | APT41 has exploited vulnerable internet-facing applications, including Citrix, Cisco, Zoho, Exchange, Log4j-affected applications and other web applications | Internet-facing financial services and third-party systems are high-value entry points | WAF, reverse-proxy, application, vulnerability-management, EDR and authentication logs | MITRE and Mandiant |
+| `T1505.003` | Server Software Component: Web Shell | APT41 has deployed web shells for persistence and command execution | Web shells can provide quiet, long-term access to exposed servers | Web-server file changes, process creation, web-access, EDR and integrity-monitoring logs | MITRE |
+| `T1078` | Valid Accounts | APT41 has used compromised credentials to access additional systems | Valid accounts can blend with normal employee or administrator activity | Identity-provider, VPN, Active Directory, cloud sign-in and privileged-access logs | MITRE |
+| `T1550.002` | Use Alternate Authentication Material: Pass the Hash | APT41 has used captured password hashes for lateral movement | Financial networks often contain privileged Windows infrastructure and segmented systems | Windows authentication, EDR, lateral-movement and privileged-account telemetry | MITRE |
+| `T1567.002` | Exfiltration Over Web Service: Exfiltration to Cloud Storage | APT41 DUST exfiltrated collected information to OneDrive | Legitimate cloud services may allow data theft to resemble normal traffic | Cloud access, proxy, endpoint, Microsoft 365 and data-loss-prevention logs | MITRE and Mandiant |
+| `T1195.002` | Supply Chain Compromise: Compromise Software Supply Chain | APT41 has injected malicious code into legitimate software files distributed to selected victims | A compromised financial technology provider can expose many downstream organisations | Software integrity, code-signing, build-pipeline, vendor-risk and endpoint telemetry | Mandiant |
 
 ## Detection and Threat-Hunting Questions
 
@@ -86,10 +95,11 @@ For each selected technique, the final report must answer:
 
 ## Intelligence Gaps
 
-- The degree to which public aliases overlap is source-dependent.
-- Public reporting does not necessarily expose all victims or campaigns.
-- APT41's relevance to Eastern European financial institutions needs to be compared with actors that have stronger direct regional targeting.
+- Public alias overlap remains source-dependent.
+- Public reporting does not expose all victims or campaigns.
+- Direct finance-specific European activity during 2023–2026 is less visible than APT41's broad global targeting.
 - Similar tools and techniques are used by many actors, so ATT&CK overlap alone cannot prove attribution.
+- The relationship between state-directed activity and personal-gain operations is an analytical assessment, not proof that every operation had the same command structure.
 
 ## Authoritative Starting Sources
 
