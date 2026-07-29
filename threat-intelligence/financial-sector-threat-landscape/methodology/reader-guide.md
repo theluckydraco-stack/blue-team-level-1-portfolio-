@@ -26,9 +26,17 @@ An **extortion brand** is a public name used to threaten victims and publish sto
 
 **Single sign-on (SSO)** lets one identity access several applications. **Multi-factor authentication (MFA)** requires an additional proof of identity, such as a security key or authenticator. Weak account-recovery processes can undermine both controls.
 
+## Session token
+
+A **session token** is a temporary digital credential showing that a user has already authenticated. If an attacker steals a valid token, they may be able to access a service without re-entering the password or completing MFA.
+
 ## Third-party and supply-chain risk
 
 A **third party** is a supplier, service provider or technology partner trusted by the organisation. A **supply-chain compromise** uses that trusted relationship to reach downstream customers. The direct victim may be a vendor whose systems hold or process data for many financial organisations.
+
+## Concentration risk
+
+**Concentration risk** exists when many important business services or organisations depend on the same provider, product or platform. One failure or compromise can therefore create impact across several customers at the same time.
 
 ## Managed file transfer
 
@@ -37,6 +45,18 @@ A **managed file transfer (MFT)** platform is enterprise software used to exchan
 ## Enterprise resource planning
 
 An **enterprise resource planning (ERP)** platform supports central business processes such as finance, procurement, payroll, suppliers and reporting. Oracle E-Business Suite is an ERP platform. A compromise may therefore expose both operational systems and high-value business records.
+
+## Business email compromise
+
+**Business email compromise (BEC)** is a fraud model in which an attacker impersonates or compromises a trusted business identity and uses that trust to redirect a payment, change supplier details or obtain sensitive information.
+
+## Insider risk
+
+**Insider risk** is the possibility that trusted access is misused intentionally, negligently, accidentally or after an account is compromised. It includes employees, contractors and outsourced support personnel.
+
+## DDoS
+
+A **distributed denial-of-service (DDoS) attack** uses traffic from many systems or services to make a target unavailable or slow. In finance, it can interrupt online banking, payment APIs, customer authentication or trading services.
 
 ## Zero-day vulnerability
 
@@ -50,9 +70,41 @@ A **web shell** is a malicious script placed on a web server that lets an attack
 
 **MITRE ATT&CK** is a public knowledge base that gives common names and identifiers to observed attacker behaviours. It helps defenders compare incidents, identify required logs and test detection coverage. Technique overlap does not prove that two incidents were caused by the same actor.
 
+## Indicator and observable
+
+An **observable** is something seen during an investigation, such as a domain, file hash or account. An **indicator** is an observable assessed as meaningfully associated with malicious activity. Not every artifact should automatically be treated as an IOC.
+
 ## Telemetry and threat hunting
 
 **Telemetry** is the security-relevant data produced by systems, including identity, endpoint, application, cloud and network logs. **Threat hunting** is the proactive search for suspicious behaviour that may not have generated an alert.
+
+## Detection specification
+
+A **detection specification** describes the behaviour to identify, required data, correlation logic, expected false positives, investigation steps and validation method. It is broader than a single SIEM query.
+
+## SIEM and Sigma
+
+A **security information and event management (SIEM)** platform collects and analyses security logs. **Sigma** is a generic detection-rule format that can be converted into queries for different SIEM platforms, but the rule still requires field mapping, tuning and testing.
+
+## MISP
+
+**MISP** is an open-source threat-intelligence and sharing platform. It can store indicators, reports, ATT&CK behaviours, relationships, analyst opinions and sharing restrictions.
+
+## STIX and TAXII
+
+**STIX** is a structured model for representing cyber-threat information. **TAXII** is a protocol for exchanging CTI, including STIX content, between systems.
+
+## RDAP and WHOIS
+
+**RDAP** is the current structured protocol for accessing domain-registration data. For generic top-level domains, it became the definitive source in January 2025 in place of sunsetted WHOIS services.
+
+## TLP
+
+The **Traffic Light Protocol (TLP)** states who may receive information. TLP 2.0 uses `TLP:RED`, `TLP:AMBER`, `TLP:GREEN` and `TLP:CLEAR`. `TLP:WHITE` is deprecated.
+
+## DORA
+
+The **Digital Operational Resilience Act (DORA)** is an EU regulation applying to the financial sector since 17 January 2025. It addresses ICT risk management, incidents, resilience testing, third-party risk and information sharing.
 
 ## Confidence
 
