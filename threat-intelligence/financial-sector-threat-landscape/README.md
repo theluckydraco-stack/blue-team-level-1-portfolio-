@@ -2,7 +2,7 @@
 
 ## Project Status
 
-**In progress — APT41 and DPRK baselines complete; Scattered Spider research next**
+**In progress — APT41, DPRK and Scattered Spider baselines complete; CL0P research next**
 
 ## Problem Statement
 
@@ -100,8 +100,9 @@ The detailed method is documented in [Analytic Framework](methodology/analytic-f
 - [DPRK financial-theft profile](actor-profiles/dprk-financial-theft.md) — baseline complete
 - [DMM Bitcoin 2024 attack-path case study](campaign-analysis/dmm-bitcoin-2024.md)
 - [Bybit 2025 strategic and laundering case study](campaign-analysis/bybit-2025.md)
-- [Scattered Spider / UNC3944 profile](actor-profiles/scattered-spider.md) — next research phase
-- [CL0P third-party compromise profile](actor-profiles/clop.md) — planned
+- [Scattered Spider / UNC3944 profile](actor-profiles/scattered-spider.md) — baseline complete
+- [UNC3944 help-desk-to-SaaS attack-path case study](campaign-analysis/unc3944-helpdesk-to-saas.md)
+- [CL0P third-party compromise profile](actor-profiles/clop.md) — next research phase
 - Cobalt Group historical regional profile — planned
 - Silence historical regional profile — planned
 - [Actor comparison dataset](data/actor-comparison.csv)
@@ -122,6 +123,6 @@ The detailed method is documented in [Analytic Framework](methodology/analytic-f
 
 ## Current Phase
 
-The DPRK baseline now covers direct financial theft, cloud compromise, developer social engineering, third-party wallet infrastructure, session theft, laundering, IT-worker expansion into Europe, strategic state-revenue context, detection opportunities and business implications.
+The Scattered Spider baseline now covers help-desk social engineering, MFA reset abuse, identity recovery, SSO expansion, cloud and SaaS access, virtualisation control, cloud-to-cloud exfiltration, employee intimidation, public legal allegations and financial-sector relevance.
 
-The next phase is Scattered Spider / UNC3944 because it provides the strongest identity, help-desk, SaaS and virtualisation comparison for a modern financial SOC.
+The next phase is CL0P-related third-party exploitation because it will test a different problem: how one vulnerable enterprise product can expose many downstream organisations without each victim being targeted individually.
