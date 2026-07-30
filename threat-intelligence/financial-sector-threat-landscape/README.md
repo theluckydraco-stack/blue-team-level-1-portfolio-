@@ -10,17 +10,47 @@ The project is maintained through a weekly financial-threat watch so credible ne
 
 ## Problem Statement
 
-Modern financial services are not contained inside traditional bank servers. Banks, payment processors, fintech platforms and cryptocurrency services depend on cloud accounts, online business applications, virtualisation, APIs, outsourced service desks, software vendors, open-source packages and other third parties.
+Modern financial services are not contained inside traditional bank servers. Banks, payment processors, fintech platforms and cryptocurrency services depend on cloud accounts, SaaS applications, virtualisation, APIs, developers, outsourced support teams, software vendors, open-source packages and other third parties. [ENISA notes that the finance sector increasingly relies on ICT infrastructure, providers and their supply chains.](https://www.enisa.europa.eu/topics/cybersecurity-of-critical-sectors/finance)
 
-A report that only lists malware, IP addresses or MITRE ATT&CK techniques may still fail to answer the questions that matter:
+Attackers therefore do not always begin by attacking the system that holds the money. They may first compromise a **trusted relationship** capable of influencing money, customer data or financial operations, such as:
 
-- Why was this organisation or employee targeted?
-- What did the attacker want to achieve?
-- Which business dependency made the attack possible?
-- What evidence should a SOC collect?
-- What should security leaders change?
+```text
+A help desk that can reset MFA
+A developer who can modify transaction software
+A cloud session that can access production systems
+A support agent who can view customer information
+A supplier that stores financial records
+A SaaS integration connected to several applications
+A payment-approval or beneficiary-change process
+```
 
-I developed this threat-intelligence assessment to connect technical activity to victim selection, timing, motivation, business impact and defensive decisions.
+The [2024 DMM Bitcoin theft](https://www.fbi.gov/news/press-releases/fbi-dc3-and-npa-identification-of-north-korean-cyber-actors-tracked-as-tradertraitor-responsible-for-theft-of-308-million-from-bitcoindmmcom) demonstrates this problem. North Korean actors first targeted an employee of Ginco, a wallet-software provider, through a fake LinkedIn recruitment approach and malicious Python code. They later used stolen session information to impersonate the trusted employee and likely manipulate a legitimate transaction request, resulting in the theft of approximately USD 308 million. The initial target was not the exchange holding the funds; it was a trusted employee and supplier positioned inside the transaction process.
+
+This means that evidence must be collected from the places where trust is granted and exercised—not only from endpoint antivirus or firewall logs:
+
+```text
+Identity and MFA records
+Help-desk and account-recovery tickets
+Cloud and SaaS audit logs
+Developer, repository and CI/CD activity
+Supplier and application logs
+Customer-support access records
+Payment, beneficiary and transaction events
+Fraud, AML and sanctions-monitoring systems
+```
+
+I therefore analyse each threat by asking:
+
+1. Which financial asset, service or transaction is at risk?
+2. Which person, system, supplier or process is trusted to influence it?
+3. How could an attacker abuse that trust?
+4. What evidence would the abuse leave behind?
+5. How could a financial SOC detect, investigate and contain it?
+6. What control should the organisation change to prevent the same attack path from succeeding again?
+
+The project is therefore not only asking, *“Which threat actor is dangerous?”* It is asking:
+
+> **Which trusted relationship gives an attacker a path to money, customer data or financial operations; where would the evidence appear; and how should the financial institution detect and stop that abuse?**
 
 ## Who This Is Written For
 
