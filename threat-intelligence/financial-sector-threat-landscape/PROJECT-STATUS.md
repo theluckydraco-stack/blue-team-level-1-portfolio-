@@ -28,9 +28,26 @@
 ### Current-source maintenance
 
 - Weekly Financial Threat Watch enabled
+- [Material update index](updates/README.md)
 - Research and operational source logs
 - Strategic and operational context registers
 - 2023–2026 financial threat timeline
+
+## Latest material update — 3 August 2026
+
+The latest review did not change the actor ranking. It strengthened two parts of the project:
+
+1. **Open-source and CI/CD compromise received higher operational priority.** Package registries, maintainer identities, workflow triggers, repository secrets and build-runner egress are now treated as first-tier financial telemetry.
+2. **GTIG actor-name changes were recorded without rewriting historical sources.** The project now tracks current mappings such as `UNC1069` / `MASAN` to `MIDNIGHT NEPTUNE`, `APT41` to `SPIRE CASTLE`, and `FIN11` to `RAZOR COMET`.
+
+Files added or updated:
+
+- [Financial Threat Watch — 3 August 2026](updates/2026-08-03-financial-threat-watch.md)
+- [Open-source supply-chain priority update](analysis/open-source-supply-chain-priority-update-2026.md)
+- [Actor alias management method](methodology/actor-alias-management.md)
+- [Actor alias register](data/actor-alias-register.csv)
+- [MIDNIGHT NEPTUNE / UNC1069 case study](campaign-analysis/unc1069-crypto-social-engineering-and-axios-2026.md)
+- [Developer or supply-chain compromise detection specification](detections/developer-to-transaction-compromise.md)
 
 ## Prepared but not yet executed
 
