@@ -1,0 +1,4 @@
+source,previous_name,current_gtig_name,category,mapping_published_date,project_usage,caveat
+Google Threat Intelligence,"UNC1069; MASAN","MIDNIGHT NEPTUNE",North Korea,2026-07-30,"Use MIDNIGHT NEPTUNE for current GTIG references; preserve UNC1069 or MASAN when citing reports published under those names","The mapping identifies a GTIG cluster; it does not make every DPRK label equivalent"
+Google Threat Intelligence,APT41,"SPIRE CASTLE",People's Republic of China,2026-07-30,"Keep APT41 in historical and MITRE-based sections; record SPIRE CASTLE as the current GTIG name","Other vendors may define overlapping clusters differently"
+Google Threat Intelligence,FIN11,"RAZOR COMET",Cybercriminal,2026-07-30,"Use RAZOR COMET only for current GTIG references to FIN11; keep CL0P as an extortion brand and source-specific campaign label","FIN11, CL0P and every operator using the brand are not automatically one fixed organisation"
