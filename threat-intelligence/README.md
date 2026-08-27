@@ -6,6 +6,24 @@ The work focuses on turning public reporting and technical evidence into intelli
 
 ## Projects
 
+### MISP Threat Intelligence Platform Lab
+
+I completed a hands-on MISP investigation covering ransomware, Turla, DDoS botnets and exploitation of Mitel MiVoice infrastructure.
+
+The lab demonstrates:
+
+- MISP event, attribute, tag and Galaxy investigation;
+- MITRE ATT&CK mapping and actor pivots;
+- IOC extraction and external-source enrichment;
+- YARA interpretation;
+- C2, persistence and vulnerability analysis;
+- threat-intelligence triage and signal-to-noise assessment;
+- translation of CTI findings into SOC hunts, detection opportunities and remediation actions.
+
+A key observation was that the largest MISP event was not always the most useful starting point: a smaller, more focused event often provided the relevant intelligence faster. The report therefore emphasizes relevance, context, confidence and timeliness rather than raw indicator volume.
+
+[View the MISP Threat Intelligence Platform Lab](misp-threat-intelligence-platform-lab/README.md)
+
 ### Digital Financial Services Threat Landscape
 
 I completed a relevance-based assessment of current and historical threats affecting banks, payment processors, fintech platforms, cryptocurrency services and their technology providers.
