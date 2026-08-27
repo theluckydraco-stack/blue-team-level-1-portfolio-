@@ -17,12 +17,22 @@ Each project documents the objective, tools used, investigation process, finding
 | Domain | Projects | Status |
 |---|---|---|
 | [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
-| [Threat Intelligence](threat-intelligence/README.md) | [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Research and detection design completed; lab validation next** |
+| [Threat Intelligence](threat-intelligence/README.md) | [MISP Threat Intelligence Platform Lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md), [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **MISP lab completed; financial detection validation next** |
 | Digital Forensics | Projects to be added | In progress |
 | SIEM | Projects to be added | In progress |
 | Incident Response | Projects to be added | In progress |
 
-## Current Portfolio Project
+## Current Portfolio Work
+
+### MISP Threat Intelligence Platform Lab
+
+I completed a hands-on MISP investigation covering ransomware, Turla, DDoS botnets and exploitation of Mitel MiVoice infrastructure.
+
+The exercise demonstrates how a Threat Intelligence Platform can be used to search and correlate events, extract IOCs, pivot through actor and malware context, interpret ATT&CK mappings, enrich findings through external reporting and turn CTI into SOC hunting, detection and remediation opportunities.
+
+A key operational lesson was that more attributes did not automatically mean more useful intelligence: focused events with strong context could answer an intelligence requirement faster than much larger datasets.
+
+[View the MISP lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md)
 
 ### Digital Financial Services Threat Landscape
 
