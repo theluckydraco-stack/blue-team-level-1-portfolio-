@@ -26,11 +26,11 @@ Each project documents the objective, tools used, investigation process, finding
 
 ### MISP Threat Intelligence Platform Lab
 
-I completed a hands-on MISP investigation covering ransomware, Turla, DDoS botnets and exploitation of Mitel MiVoice infrastructure.
+I completed a hands-on MISP investigation designed around a practical defensive question: **if a security concern or suspected incident arises, how can I use MISP to find the relevant intelligence and turn it into action?**
 
-The exercise demonstrates how a Threat Intelligence Platform can be used to search and correlate events, extract IOCs, pivot through actor and malware context, interpret ATT&CK mappings, enrich findings through external reporting and turn CTI into SOC hunting, detection and remediation opportunities.
+The project follows an incident-to-intelligence-to-defence workflow: search for the most relevant MISP event, filter and pivot through attributes, tags, Galaxies and ATT&CK context, validate the intelligence with external reporting, then translate the result into a SOC hunt, detection requirement, vulnerability-remediation action or compromise assessment.
 
-A key operational lesson was that more attributes did not automatically mean more useful intelligence: focused events with strong context could answer an intelligence requirement faster than much larger datasets.
+The lab covers ransomware, Turla activity, DDoS botnets and exploitation of Mitel MiVoice infrastructure. A key operational lesson was that more attributes did not automatically mean more useful intelligence: focused events with strong context could answer an intelligence requirement faster than much larger datasets.
 
 [View the MISP lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md)
 
