@@ -1,334 +1,302 @@
 # MISP Threat Intelligence Platform Lab
 
-## Why I built this project
+## Purpose
 
-This BTL1 lab was not documented as a list of quiz answers. I used it to answer a more operational question:
+This project demonstrates how I would use MISP during a real security investigation: start with a security question or suspected incident, locate the most relevant intelligence, pivot through related context, validate the findings, and convert them into a defensive action.
 
-> **Given a security question or possible incident, how do I use a Threat Intelligence Platform to locate relevant intelligence, pivot through related evidence, validate it against external sources, and convert it into defensive action?**
-
-I used a controlled MISP instance to investigate ransomware, Turla activity, DDoS botnets, and exploitation of Mitel MiVoice infrastructure.
-
-The purpose of the project is to show the workflow a Threat Intelligence Analyst or SOC analyst could follow when an investigation begins with an incomplete question such as:
-
-- "We saw a domain associated with LockBit. What does it mean and what should we search internally?"
-- "This campaign is attributed to Turla. What behaviours should our detection team care about?"
-- "A Linux host may be part of a DDoS botnet. What indicators and host behaviours can we hunt for?"
-- "We run MiVoice. A ransomware report says it was exploited. Are we exposed, and what evidence of compromise should we look for?"
-
-The key lesson was that MISP is useful when it helps move from **question -> intelligence -> validation -> defensive decision**.
-
-## Investigation workflow
-
-I followed the same basic method across the four tasks:
+The objective was **not** to show that I can search a Threat Intelligence Platform for quiz answers. The objective was to practice this operational workflow:
 
 ```text
-Security question / incident lead
-            |
-            v
+Security question / suspected incident
+              |
+              v
         Search MISP
-            |
-            v
+              |
+              v
    Identify relevant event
-            |
-            v
-Filter attributes and context
-            |
-      +-----+------+
-      |            |
-     IOCs         TTPs
-      |            |
-      v            v
-External refs   ATT&CK / Galaxies
-      |            |
-      +-----+------+
-            |
-            v
- Validate and add context
-            |
-            v
- Ask what defenders can do
-            |
-   +--------+---------+
-   |        |         |
-  Hunt    Detect    Remediate
- SIEM/EDR  Rules    Patch/Block
+              |
+              v
+Filter -> pivot -> correlate -> enrich
+              |
+        +-----+-----+
+        |           |
+       IOCs        TTPs
+        |           |
+        v           v
+ Internal hunt   ATT&CK context
+        |           |
+        +-----+-----+
+              |
+              v
+       Defensive decision
+
+Hunt | Detect | Patch | Block | Investigate | Report
 ```
 
-MISP supplied the structured intelligence and relationships. External reporting supplied the deeper technical context needed to understand what the indicators actually meant.
+In the controlled BTL1 lab, I applied this process to ransomware, Turla activity, DDoS botnets, and exploitation of Mitel MiVoice infrastructure.
 
-## Tools and sources
+## What I wanted to prove
 
-- MISP
-- MITRE ATT&CK data embedded in MISP
-- VirusTotal enrichment links provided through MISP
-- Arctic Wolf Labs threat research
-- Mitel security advisories
-- CISA Known Exploited Vulnerabilities information
-- public malware research referenced by MISP
+Given a question such as:
 
-The lab was completed in an isolated training environment. No live malicious files are stored in this repository.
+- "Are we exposed to infrastructure associated with this ransomware campaign?"
+- "How does this threat actor behave, and do we detect those techniques?"
+- "How could we identify hosts infected with this botnet?"
+- "We use this vulnerable product. What should the security team do now?"
+
+I can use MISP to move from **external threat information** to **specific defensive actions**.
+
+That distinction is important: an IOC, hash, ATT&CK technique, vulnerability, or threat-actor tag has little value on its own unless it changes what the SOC, detection team, vulnerability team, or incident responders do next.
 
 ---
 
-# Investigation 1: Ransomware intelligence
+## Environment and tools
 
-## Security question
+- MISP
+- MITRE ATT&CK data embedded in MISP
+- MISP Events, Attributes, Tags and Galaxies
+- VirusTotal enrichment links provided through MISP
+- Arctic Wolf Labs threat research
+- Mitel security advisory material
+- public malware research referenced by MISP
 
-The organisation is concerned about ransomware. If a SOC receives ransomware-related threat intelligence, what information in MISP can be converted into an internal hunt or detection opportunity?
+All work was performed in the controlled BTL1 environment or against public threat-intelligence reporting. No malware samples or live credentials are stored in this repository.
 
-## How I used MISP
+---
 
-I searched MISP for ransomware-related events and then narrowed the investigation to LockBit and Babuk.
+# Investigation 1 — Ransomware intelligence
 
-For LockBit, I moved from the event into its network attributes. For Babuk, I examined the event's malware-detection content rather than focusing only on IP addresses or domains.
+## Intelligence requirement
 
-## LockBit finding
+**If ransomware is a concern to the organisation, what intelligence can I extract from MISP that a defender can actually use?**
 
-The event contained the domain:
+I searched ransomware-related events and then narrowed the investigation to LockBit and Babuk.
+
+## LockBit: from a domain to a SOC hunt
+
+A LockBit event contained the domain:
 
 ```text
 orangebronze[.]com
 ```
 
-MISP described the domain as Cobalt Strike command-and-control infrastructure.
+MISP provided the important context: the attribute was described as a **Cobalt Strike C2 server**.
 
-![Filtered MISP attribute showing orangebronze.com identified as Cobalt Strike C2](01-lockbit-c2-domain.png)
-
-*Evidence: the filtered domain attribute is labelled as a Cobalt Strike C2 server.*
+![LockBit MISP attribute showing the C2-associated domain](01-lockbit-c2-domain.png)
 
 ### Operational meaning
 
-A domain alone is only an observable. The C2 context changes what a defender can do with it.
+A domain alone is only an observable. The C2 context tells the SOC why it matters.
 
-If this intelligence were relevant to an active incident, I would use it to search:
-
-- DNS logs for systems that resolved the domain;
-- proxy/firewall telemetry for connections to the infrastructure;
-- EDR telemetry for the process responsible for the connection;
-- historical SIEM data to determine whether the activity pre-dated the alert.
-
-The workflow becomes:
+If this intelligence were relevant to my organisation, I would use it to search:
 
 ```text
-MISP IOC
-orangebronze[.]com
-        |
-        v
-Context: Cobalt Strike C2
-        |
-        v
-Search internal DNS / proxy / EDR
-        |
-        v
-Identify affected host and user
-        |
-        v
-Escalate to incident investigation if observed
+DNS logs       -> Did any host resolve the domain?
+Proxy logs     -> Did a user or process request it?
+Firewall logs  -> Was a connection attempted or allowed?
+EDR telemetry  -> Which process initiated the connection?
+SIEM           -> Which host, user and time window are involved?
 ```
 
-This demonstrates the difference between simply possessing an IOC and **operationalising** it.
+The defensive output is therefore not "I found a malicious domain." It is a **historical or current environment-wide hunt for contact with reported C2 infrastructure**.
 
-## Babuk finding
+I would not automatically block an indicator solely because it exists in a feed. Source, age, confidence, current ownership and potential shared infrastructure would also need to be considered.
 
-The Babuk event contained a YARA rule with strings associated with the ransomware. One of those strings revealed the ransom-note filename:
+## Babuk: intelligence as detection content
+
+The Babuk event contained a YARA rule. One of its strings identified the ransom-note filename:
 
 ```text
 How To Restore Your Files.txt
 ```
 
-![Babuk YARA rule highlighting the ransom-note filename](02-babuk-yara-ransom-note.png)
-
-*Evidence: the Babuk YARA rule includes `How To Restore Your Files.txt` as a wide string.*
+![Babuk YARA rule containing the ransom-note string](02-babuk-yara-ransom-note.png)
 
 ### Operational meaning
 
-The important finding was not the filename itself. It was that threat intelligence can contain **detection logic**, not only IPs, domains and hashes.
+This showed that a TIP can store more than network IOCs. Threat intelligence can also provide **detection logic**.
 
 A validated YARA rule could support:
 
 - malware triage;
-- file-system hunting;
-- memory or forensic scanning;
-- retrospective searches against collected samples.
+- scanning collected files;
+- memory or forensic hunting where appropriate;
+- identifying samples that share characteristic strings or byte patterns.
 
-The rule would still need to be tested against benign data before production use because broad strings can create false positives.
+The rule would still need validation against benign data before production use because broad YARA conditions can produce false positives.
 
-This was the first clear example in the lab of intelligence becoming a detection capability rather than remaining a static report.
+### Defensive lesson
+
+```text
+Threat report
+     |
+     v
+MISP intelligence
+     |
+     +--> IOC -> network/endpoint hunt
+     |
+     +--> YARA -> file/memory detection opportunity
+```
+
+MISP is useful because it can preserve both the indicator and the context needed to decide how that indicator should be used.
 
 ---
 
-# Investigation 2: Turla and ATT&CK context
+# Investigation 2 — Turla and behaviour-centric intelligence
 
-## Security question
+## Intelligence requirement
 
-If an investigation is linked to a known threat actor, how can MISP help move from the actor name to behaviours that the SOC can actually hunt or detect?
+**If intelligence identifies Turla as relevant, how can I move beyond individual IOCs and understand the behaviours I should detect or hunt for?**
 
-## How I used MISP
+I investigated a Turla-related MISP event and opened its ATT&CK Matrix.
 
-I investigated an event associated with Turla, tracked by MITRE as G0010.
-
-I used the ATT&CK Matrix to understand the behaviours represented in the event, then pivoted through the Turla Galaxy/tag relationship to find other events associated with the same actor.
-
-The ATT&CK Matrix highlighted techniques under:
+The highlighted techniques fell under:
 
 - Persistence
 - Privilege Escalation
 - Collection
 
-![MISP ATT&CK matrix showing highlighted Turla techniques](03-turla-attack-matrix.png)
+The event included techniques such as Component Object Model Hijacking and Email Collection.
 
-*Evidence: MISP maps Component Object Model Hijacking to Persistence and Privilege Escalation, and Email Collection to Collection.*
+![MISP ATT&CK Matrix showing highlighted Turla techniques](03-turla-attack-matrix.png)
 
-The event included behaviours such as Component Object Model Hijacking and Email Collection.
+## Pivoting through actor context
 
-I then used the Turla relationship to identify 16 associated MISP events and opened the oldest matching phishing event.
+I then used the Turla Galaxy/tag relationship to pivot from the current event to other events associated with the same actor. The lab returned 16 related records.
 
-![MISP Turla pivot returning 16 related events](04-turla-related-events.png)
+![MISP results showing Turla-related events](04-turla-related-events.png)
 
-*Evidence: the Turla pivot returned 16 matching MISP records.* That event referenced the decoy document:
+The oldest matching phishing event referenced the decoy document:
 
 ```text
 Save the Date G20 Digital Economy Taskforce 23 24 October.pdf
 ```
 
-![MISP attribute showing the Turla decoy document name](05-turla-decoy-document.png)
+![Turla event attribute showing the decoy PDF](05-turla-decoy-document.png)
 
-*Evidence: the filtered filename attribute identifies the benign-looking PDF decoy used in the phishing event.*
+### Operational meaning
 
-## Operational meaning
+This part of the lab demonstrated why CTI should not be limited to IOC matching.
 
-This investigation showed why CTI should not stop at attribution.
+A hash, domain or IP may become obsolete quickly. ATT&CK mappings describe behaviours that can be used to:
 
-Knowing that an event is "Turla" does not by itself give the SOC a detection. ATT&CK context helps translate actor intelligence into behaviour that defenders can assess.
+- check whether current detections cover the reported techniques;
+- determine which logs and telemetry are required;
+- build threat-hunting hypotheses;
+- compare behaviours across several campaigns;
+- communicate the same attacker behaviour consistently between CTI, SOC and detection teams.
 
-For each mapped technique, a detection team can ask:
+The MISP Galaxy/tag pivot also showed how a TIP prevents each report from being treated as an isolated document.
 
 ```text
-Do we collect the telemetry required to see this behaviour?
-                |
-                v
-Do we already have a detection for it?
-                |
-        +-------+-------+
-        |               |
-       Yes              No
-        |               |
-Validate coverage   Build / tune detection
+Single event
+    |
+    v
+Threat-actor Galaxy
+    |
+    v
+Related events
+    |
+    +--> historical campaigns
+    +--> malware
+    +--> ATT&CK techniques
+    +--> indicators
+    |
+    v
+Broader adversary picture
 ```
 
-The Galaxy pivot also demonstrated why MISP is more useful than an isolated PDF or IOC list. I could move from one event to a wider body of intelligence related to the same actor and compare activity across campaigns.
-
-This supports:
-
-- threat-hunting hypotheses;
-- ATT&CK coverage reviews;
-- detection engineering;
-- campaign comparison;
-- incident scoping.
+If this were an active incident, that broader picture would help me decide **what else to look for after the first suspicious observation**.
 
 ---
 
-# Investigation 3: DDoS and botnet intelligence
+# Investigation 3 — DDoS and botnet intelligence
 
-## Security question
+## Intelligence requirement
 
-If a company is concerned that one of its systems may have been compromised and turned into a DDoS bot, what intelligence can help confirm or disprove that hypothesis?
+**If availability is critical to the business, how can threat intelligence help identify infrastructure or hosts involved in DDoS activity?**
 
-## How I used MISP
+The investigation covered DDoS booter infrastructure, CoalaBot and the Rhombus Linux botnet.
 
-I investigated DDoS-related events covering booter infrastructure, CoalaBot and the Rhombus Linux botnet.
+The relevant DDoS event contained 24 IP-address attributes.
 
-Filtering the relevant DDoS event showed 24 IP-address attributes.
+## CoalaBot: enrichment of a malware indicator
 
-A VirusTotal reference for CoalaBot identified the original filename:
+A VirusTotal reference linked from the MISP intelligence identified the original filename:
 
 ```text
 cla.exe
 ```
 
-![VirusTotal result for CoalaBot showing the original filename cla.exe](06-coalabot-virustotal.png)
+![VirusTotal enrichment showing the CoalaBot filename](06-coalabot-virustotal.png)
 
-*Evidence: the linked VirusTotal record identifies `cla.exe` and shows 56 of 71 engines flagging the sample at the time of the lab.*
+### Operational meaning
 
-The filename is useful context, but it is a weak standalone indicator because an attacker can rename a binary. It becomes more useful when combined with hashes, network destinations and behavioural evidence.
+A filename is weak evidence by itself because malware can be renamed. It becomes more useful when correlated with:
 
-## Rhombus finding
+- SHA256 hashes;
+- behaviour;
+- network destinations;
+- process lineage;
+- malware-family context.
 
-The Rhombus research referenced by MISP described an ELF installer/dropper targeting Linux and IoT systems.
+This is the purpose of enrichment: **increase the amount of decision-relevant context around an observable**.
 
-The reported bot behaviour included:
+## Rhombus: turning malware research into hunting opportunities
 
-- dropping/executing another ELF payload;
-- persistence through a cron entry;
-- listening locally on TCP/12645;
-- callback to C2 at `209.126.69[.]167:2020`;
-- receiving command-and-control instructions;
-- several DoS attack variations;
-- remote command execution.
+The public research referenced by MISP described Rhombus as an ELF installer/dropper targeting Linux and IoT systems. The reported bot client called back to:
 
-![Rhombus research showing the local listener and C2 callback](07-rhombus-callback-ip.png)
+```text
+209.126.69[.]167:2020
+```
 
-*Evidence: the research records TCP/12645 as the local listener and `209.126.69[.]167:2020` as the callback destination.*
+![Rhombus research showing the reported callback address](07-rhombus-callback-ip.png)
 
-The reported persistence location was:
+The research also described a local listener on TCP/12645, a dropped ELF payload and persistence involving:
 
 ```text
 /etc/cron.hourly/0
 ```
 
-Source used during the exercise:
-https://www.reddit.com/r/LinuxMalware/comments/fh3zar/memo_rhombus_an_elf_bot_installerdropper/
+### Operational meaning
 
-## Operational meaning
-
-If the security question is "Is this Linux host infected with Rhombus?", a mature hunt should not rely on one historical C2 address.
-
-The intelligence creates several independent hypotheses:
+The strongest defensive use is not simply blocking one historical C2 address. The report creates several independent detection and hunting opportunities:
 
 ```text
 Network
-  -> outbound connection to known C2
+  -> outbound connection to reported C2
 
 Filesystem
-  -> unexpected ELF payload under /tmp
+  -> suspicious ELF written in a temporary location
 
 Persistence
-  -> suspicious /etc/cron.hourly/0 entry
+  -> unexpected cron.hourly entry
 
-Process/network behaviour
-  -> listener on TCP/12645
+Process behaviour
+  -> unusual shell or remote-command execution
 
-Execution
-  -> shell or remote-command activity associated with the bot
+Network service
+  -> unexpected local listener on TCP/12645
 ```
 
-A historical IP may become stale. A combination of filesystem, persistence, process and network evidence gives the defender more resilient coverage.
+If the attacker changes the C2 address, the behavioural and host-level evidence may still be useful. This is why CTI should combine IOCs with more durable behaviours.
 
-This is the practical difference between **IOC matching** and **behaviour-informed detection**.
+Source used during the exercise:
+https://www.reddit.com/r/LinuxMalware/comments/fh3zar/memo_rhombus_an_elf_bot_installerdropper/
 
 ---
 
-# Investigation 4: Mitel MiVoice and Lorenz ransomware
+# Investigation 4 — Mitel MiVoice and Lorenz ransomware
 
-## Security question
+## Intelligence requirement
 
-This was the investigation that most closely resembled a real incident-response intelligence request:
+**If the organisation uses a product reported as exploited in ransomware attacks, how do I determine whether we are exposed and what defenders should do?**
 
-> **"We use MiVoice and reporting says it has been abused in ransomware attacks. Are we affected, what should we patch, and what evidence would tell us exploitation has already occurred?"**
+This was the most directly incident-response-oriented part of the lab.
 
-## How I used MISP
+The MISP intelligence connected exploitation of Mitel MiVoice Connect infrastructure with Lorenz ransomware activity.
 
-I searched for MiVoice-related events.
-
-An important observation was that the event with fewer attributes gave me the relevant vulnerability and external reference faster than the much larger event. I then used the larger event for broader ATT&CK, malware and campaign context.
-
-That became a useful lesson in intelligence triage: the largest event is not automatically the most useful event for the question being asked.
-
-![MISP MiVoice search showing a 61-attribute event and a 17-attribute event](09-mivoice-event-comparison.png)
-
-*Evidence: the same search returned a dense 61-attribute event and a smaller 17-attribute event, supporting the relevance-over-volume comparison.*
-
-## Vulnerability finding
+## Step 1: establish exposure
 
 The exploited vulnerability was:
 
@@ -336,23 +304,47 @@ The exploited vulnerability was:
 CVE-2022-29499
 ```
 
-The affected MiVoice Connect versions included:
+The referenced reporting identified **MiVoice Connect 19.2 SP3 and earlier**, including earlier 14.x releases, as affected and recommended upgrading to R19.3.
+
+![MiVoice affected-version and remediation information](08-mivoice-impacted-versions.png)
+
+The first operational questions would therefore be:
 
 ```text
-19.2 SP3 and earlier
+Do we use MiVoice Connect?
+        |
+        v
+Which versions are deployed?
+        |
+        v
+Is the affected Service Appliance present?
+        |
+        +--> No  -> document non-exposure
+        |
+        +--> Yes -> remediate + assess for compromise
 ```
 
-including earlier 14.2 releases.
+Patching is only one part of the response. If exploitation may already have occurred, the security team must investigate for evidence of compromise.
 
-Mitel subsequently released MiVoice Connect R19.3 to remediate the vulnerability.
+## Step 2: find the most relevant intelligence
 
-![MiVoice remediation guidance and impacted versions](08-mivoice-impacted-versions.png)
+The MISP search returned more than one MiVoice-related event. I found that the smaller event surfaced the information required for the immediate investigation faster than the much larger event.
 
-*Evidence: the source lists R19.2 SP3 and earlier and R14.x and earlier as impacted, with R19.3 as the fixed release.*
+![Comparison of MiVoice MISP events and their available context](09-mivoice-event-comparison.png)
 
-## Persistence finding
+This was an important analyst lesson:
 
-The Arctic Wolf report linked from MISP described a webshell used for persistence:
+```text
+More attributes != more useful intelligence
+
+Useful intelligence = relevance + context + confidence + timeliness
+```
+
+A large event may contain extensive ATT&CK mappings, malware relationships and infrastructure, but the correct starting point is the event that best answers the current intelligence requirement.
+
+## Step 3: identify evidence of persistence
+
+The Arctic Wolf reporting referenced through MISP described a webshell used for persistence:
 
 ```text
 Filename: pdf_import_export.php
@@ -360,143 +352,147 @@ Path: /vhelp/pdf/en/
 SHA256: 07838ac8fd5a59bb741aae0cf3abf48296677be7ac0864c4f124c2e168c0af94
 ```
 
-The webshell accepted a command through a POST request and decoded the supplied value from three layers of Base64 before execution.
+![Arctic Wolf reporting showing the MiVoice webshell and hash](10-mivoice-webshell-artifact.png)
 
-![Arctic Wolf persistence evidence showing the MiVoice webshell filename and hash](10-mivoice-webshell-artifact.png)
-
-*Evidence: the report shows `pdf_import_export.php`, its SHA-256 value and the triple-Base64 command-decoding logic.*
-
-The report described attackers returning roughly a month after the initial compromise, interacting with the webshell, establishing reverse-shell/tunnelling activity with Chisel and moving further into the victim environment.
+The report stated that the webshell accepted a command via POST and decoded the command from three layers of Base64 before execution. The attackers later returned to the compromised device and continued post-exploitation activity.
 
 MISP's Lorenz ransomware Galaxy described the group as active since at least February 2021.
 
-![MISP Lorenz ransomware galaxy record](11-lorenz-ransomware-galaxy.png)
+![MISP Lorenz ransomware Galaxy context](11-lorenz-ransomware-galaxy.png)
 
-*Evidence: the galaxy record identifies Lorenz as a ransomware group active since at least February 2021.*
+## Step 4: turn the intelligence into a defensive plan
 
-## Operational meaning
+If this were an organisation I was defending, I would translate the intelligence into the following workstreams.
 
-The most important defensive conclusion was that **patching and compromise assessment are different tasks**.
+### Vulnerability management
 
-If an organisation discovers that it runs a vulnerable MiVoice version, the first action is to remediate the vulnerability. But if exploitation may already have occurred, patching alone does not prove the environment is clean.
+- inventory MiVoice Connect deployments;
+- identify affected versions;
+- upgrade/remediate vulnerable systems;
+- record asset ownership and exposure.
 
-A defensive workflow would be:
+### Compromise assessment
+
+Search the appliance for:
 
 ```text
-Do we run MiVoice Connect?
-        |
-        v
-Is the deployed version vulnerable?
-        |
-       Yes
-        |
-        v
-Patch / remediate
-        |
-        v
-Assume historical exploitation is possible
-        |
-        v
-Search for persistence artifacts
-        |
-        +--> pdf_import_export.php
-        +--> reported SHA256
-        +--> /vhelp/pdf/en/
-        |
-        v
-Inspect historical network activity
-        |
-        +--> reverse shells
-        +--> Chisel / tunnelling
-        +--> unusual outbound connections
-        |
-        v
-Hunt for post-compromise activity
-        |
-        +--> credential access
-        +--> lateral movement
-        +--> data transfer
-        +--> encryption activity
+/vhelp/pdf/en/pdf_import_export.php
 ```
 
-The MiVoice appliance was an initial foothold and pivot point, not the attacker's final objective.
+and the reported SHA256.
 
-Sources:
+Then review historical telemetry for activity that occurred **before the patch was applied**, because remediation does not remove an attacker who already obtained a foothold.
+
+### Threat hunting / SOC
+
+Look for evidence consistent with the reported post-exploitation chain:
+
+- suspicious outbound connections from the appliance;
+- reverse-shell activity;
+- tunnelling or Chisel usage;
+- credential access;
+- lateral movement from the edge appliance into internal systems;
+- unusual data-transfer activity;
+- ransomware/encryption behaviour.
+
+### Incident response decision
+
+```text
+Vulnerable asset found
+        |
+        v
+Was it exposed during the exploitation window?
+        |
+        v
+Search reported artifacts + historical telemetry
+        |
+      +---+---+
+      |       |
+   No evidence   Evidence found
+      |       |
+   monitor    escalate incident
+              contain
+              scope
+              eradicate
+              recover
+```
+
+The key lesson is that **threat intelligence should lead to a decision**, not terminate at "this CVE is bad."
+
+Sources used in this investigation:
 
 - Arctic Wolf: https://arcticwolf.com/resources/blog/lorenz-ransomware-chiseling-in/
-- Mitel advisory: https://www.mitel.com/support/security-advisories/mitel-product-security-advisory-22-0002
-- CISA KEV: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+- Mitel security advisory: https://www.mitel.com/support/security-advisories/mitel-product-security-advisory-22-0002
+- CISA Known Exploited Vulnerabilities Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 
 ---
 
-# Analyst observation: more attributes did not mean better intelligence
+# What MISP was doing operationally
 
-During the MiVoice investigation, the smaller event led to the answer faster than the larger event.
+The lab changed how I think about a TIP. MISP was not simply a database in which I searched for known-bad values.
 
-The larger event contained extensive ATT&CK mappings, malware relationships, tags and other context. That context was valuable later, but it was not the fastest route to answering the immediate question about the vulnerability and affected versions.
+| MISP capability | What it provides | Defensive use |
+|---|---|---|
+| Events | Context around a report, campaign or investigation | Understand what the indicators belong to |
+| Attributes | Domains, IPs, hashes, filenames and other observables | Search SIEM/EDR/network telemetry |
+| Tags | Classification and handling context | Filter and prioritise intelligence |
+| Galaxies | Structured actors, malware and ATT&CK knowledge | Pivot across related campaigns and behaviours |
+| ATT&CK Matrix | Behavioural mapping | Identify detection coverage and telemetry requirements |
+| External references | Link back to underlying research | Validate and enrich MISP data |
+| Filtering | Reduce large events to relevant evidence | Improve analyst signal-to-noise |
+| Correlation | Connect intelligence across events | Discover relationships not obvious in one report |
+| Enrichment | Add malware/reputation/infrastructure context | Improve confidence and triage |
 
-This changed how I think about TIP data:
+The operational model I took from the lab is:
 
 ```text
-More indicators != more useful intelligence
-
-Useful intelligence =
-relevance + context + confidence + timeliness + actionability
+External intelligence
+        |
+        v
+      MISP
+        |
+  Search / filter
+        |
+  Pivot / correlate
+        |
+ Validate / enrich
+        |
+        v
+Relevant intelligence
+        |
+ +------+------+---------+
+ |             |          |
+IOC hunt   Behaviour   Vulnerability
+ |             |          |
+SIEM/EDR   Detection   Patch + assess
+ |             |          |
+ +------+------+----------+
+        |
+        v
+Defensive action
 ```
-
-A CTI analyst should not optimise for the largest event or the largest number of feeds. The objective is to find the evidence that best answers the current intelligence requirement and then add only the context needed to make a decision.
 
 ---
 
-# What MISP contributed operationally
+# Analyst takeaways
 
-This lab helped me understand MISP as an intelligence workbench rather than an IOC database.
+The most important lessons from the lab were:
 
-| MISP capability | What it meant during an investigation |
-|---|---|
-| Events | Gave me a campaign/report/incident context to investigate |
-| Attributes | Exposed individual observables such as domains, hashes, filenames and IPs |
-| Filtering | Reduced large events to the subset relevant to the current question |
-| Tags | Added classification and handling context |
-| Galaxies | Let me pivot through structured knowledge about actors and malware |
-| ATT&CK Matrix | Converted report content into adversary behaviours that detection teams can reason about |
-| External references | Took me from structured MISP data to the original technical research |
-| Correlation | Connected related intelligence across events |
-| Enrichment | Added reputation, malware or infrastructure context from other systems |
-
-The operational chain I took from the lab is:
-
-```text
-Security question
-      |
-      v
-Locate intelligence in MISP
-      |
-      v
-Filter and pivot relationships
-      |
-      v
-Validate with original reporting
-      |
-      v
-Extract IOC + behaviour + context
-      |
-      v
-Translate into a defensive decision
-      |
- +----+---------+---------+
- |              |         |
-Hunt          Detect    Remediate
-SIEM/EDR      Rules     Patch/Block
-```
-
-That is the central point of this portfolio entry.
+1. **Start with an intelligence requirement.** Searching MISP without a concrete question can produce a large amount of data but little decision value.
+2. **Context determines whether an indicator is useful.** A domain associated with C2 has more operational value than an unexplained domain string.
+3. **Pivoting is fundamental CTI work.** Tags, Galaxies, ATT&CK mappings and external references turn one event into a broader view of the actor or campaign.
+4. **More data is not necessarily better intelligence.** The smaller MiVoice event was faster and more relevant for the immediate question than the event with many more attributes.
+5. **IOCs should lead to hunts, not just blocklists.** Historical infrastructure can be searched across DNS, proxy, firewall, EDR and SIEM telemetry.
+6. **Behaviour gives more durable coverage.** Rhombus persistence/process behaviour and Turla ATT&CK mappings remain useful even when individual indicators change.
+7. **Vulnerability intelligence must include compromise assessment.** Patching an exploited edge device is not sufficient if persistence may already exist.
+8. **The final product of CTI is a decision.** Hunt, detect, patch, investigate, contain, monitor or report.
 
 ---
 
 # Skills demonstrated
 
 - MISP event and attribute investigation
+- intelligence-requirement-driven research
 - threat-intelligence search and filtering
 - IOC extraction and defanging
 - MISP Galaxy and tag pivoting
@@ -504,22 +500,25 @@ That is the central point of this portfolio entry.
 - external-source validation and enrichment
 - YARA-rule interpretation
 - malware and botnet research
-- vulnerability-intelligence analysis
 - C2 and persistence identification
+- vulnerability-intelligence analysis
 - ransomware intrusion analysis
-- intelligence triage and signal-to-noise assessment
-- translating CTI into SIEM/EDR hunts
-- identifying detection requirements from attacker behaviour
+- signal-to-noise and relevance assessment
+- translating CTI into SOC hunts and detection opportunities
 - translating vulnerability intelligence into remediation and compromise-assessment actions
+
+---
 
 # Outcome
 
-The lab demonstrated how I would use a TIP during a real security investigation: start with a concrete security question, locate the most relevant intelligence, pivot through its relationships, validate the evidence against original reporting, and determine what defenders should do next.
+The lab demonstrated a complete defensive CTI thought process:
 
-The output of CTI is therefore not the MISP event itself and not a list of twelve lab answers. The useful output is a changed defensive decision: **what to hunt, what to detect, what to patch, what to block, what to investigate, or what to report to management.**
+> **Given a possible incident or security concern, locate relevant intelligence in MISP, determine what it means in context, validate it, and translate it into concrete defensive action.**
 
-This is also the model I plan to carry into my financial-sector threat-informed detection work, where MISP can act as the CTI input layer for ATT&CK mapping, telemetry selection and validated SIEM detection development.
+The value was not the twelve lab answers. The value was learning how to move from **external intelligence -> internal investigation -> defensive decision**.
+
+This experience also provides the MISP component for my broader financial-sector threat-informed detection work, where MISP can serve as an intelligence input layer for ATT&CK mapping, telemetry selection and validated SIEM detection development.
 
 ## Safety note
 
-All investigation activity was performed in the controlled BTL1 training environment or against public threat-intelligence reporting. Malicious domains and IP addresses are defanged where appropriate, no credentials are published, and no malware samples are stored in this repository.
+All investigation activity was performed in the controlled BTL1 training environment or against public threat-intelligence reporting. Potentially malicious domains and IP addresses are defanged where appropriate. No credentials or malware samples are published.
