@@ -8,19 +8,32 @@ The work focuses on turning public reporting and technical evidence into intelli
 
 ### MISP Threat Intelligence Platform Lab
 
-I completed a hands-on MISP investigation covering ransomware, Turla, DDoS botnets and exploitation of Mitel MiVoice infrastructure.
+This project demonstrates how I would use MISP when a security question or suspected incident needs threat-intelligence context.
 
-The lab demonstrates:
+Rather than documenting the lab as a list of answers, I structured the investigation around an operational workflow:
 
-- MISP event, attribute, tag and Galaxy investigation;
-- MITRE ATT&CK mapping and actor pivots;
-- IOC extraction and external-source enrichment;
-- YARA interpretation;
-- C2, persistence and vulnerability analysis;
-- threat-intelligence triage and signal-to-noise assessment;
-- translation of CTI findings into SOC hunts, detection opportunities and remediation actions.
+```text
+Security question / suspected incident
+              -> search MISP
+              -> identify relevant intelligence
+              -> filter, pivot, correlate and enrich
+              -> extract IOCs and behaviours
+              -> validate context
+              -> translate findings into defensive action
+```
 
-A key observation was that the largest MISP event was not always the most useful starting point: a smaller, more focused event often provided the relevant intelligence faster. The report therefore emphasizes relevance, context, confidence and timeliness rather than raw indicator volume.
+The exercises covered ransomware, Turla activity, DDoS botnets and exploitation of Mitel MiVoice infrastructure. They show how MISP intelligence can become:
+
+- DNS, proxy, firewall, EDR or SIEM hunts for reported infrastructure;
+- behaviour-based hunting and detection requirements from ATT&CK mappings;
+- YARA-based malware detection opportunities;
+- botnet compromise indicators across network, host and persistence telemetry;
+- vulnerability remediation plus compromise assessment for an exploited edge system;
+- better analyst triage by prioritising relevance over raw attribute volume.
+
+A key finding from the MiVoice investigation was that the MISP event with fewer attributes surfaced the information required for the immediate question faster than the larger event. The project therefore treats intelligence value as a function of **relevance, context, confidence and timeliness**, not data volume.
+
+The central lesson is: **threat intelligence is useful when it changes a defensive decision** — hunt, detect, patch, investigate, contain, monitor or report.
 
 [View the MISP Threat Intelligence Platform Lab](misp-threat-intelligence-platform-lab/README.md)
 
