@@ -92,6 +92,10 @@ orangebronze[.]com
 
 MISP described the domain as Cobalt Strike command-and-control infrastructure.
 
+![Filtered MISP attribute showing orangebronze.com identified as Cobalt Strike C2](01-lockbit-c2-domain.png)
+
+*Evidence: the filtered domain attribute is labelled as a Cobalt Strike C2 server.*
+
 ### Operational meaning
 
 A domain alone is only an observable. The C2 context changes what a defender can do with it.
@@ -131,6 +135,10 @@ The Babuk event contained a YARA rule with strings associated with the ransomwar
 ```text
 How To Restore Your Files.txt
 ```
+
+![Babuk YARA rule highlighting the ransom-note filename](02-babuk-yara-ransom-note.png)
+
+*Evidence: the Babuk YARA rule includes `How To Restore Your Files.txt` as a wide string.*
 
 ### Operational meaning
 
@@ -173,7 +181,11 @@ The ATT&CK Matrix highlighted techniques under:
 
 The event included behaviours such as Component Object Model Hijacking and Email Collection.
 
-I then used the Turla relationship to identify 16 associated MISP events and opened the oldest matching phishing event. That event referenced the decoy document:
+I then used the Turla relationship to identify 16 associated MISP events and opened the oldest matching phishing event.
+
+![MISP Turla pivot returning 16 related events](04-turla-related-events.png)
+
+*Evidence: the Turla pivot returned 16 matching MISP records.* That event referenced the decoy document:
 
 ```text
 Save the Date G20 Digital Economy Taskforce 23 24 October.pdf
@@ -234,6 +246,10 @@ A VirusTotal reference for CoalaBot identified the original filename:
 cla.exe
 ```
 
+![VirusTotal result for CoalaBot showing the original filename cla.exe](06-coalabot-virustotal.png)
+
+*Evidence: the linked VirusTotal record identifies `cla.exe` and shows 56 of 71 engines flagging the sample at the time of the lab.*
+
 The filename is useful context, but it is a weak standalone indicator because an attacker can rename a binary. It becomes more useful when combined with hashes, network destinations and behavioural evidence.
 
 ## Rhombus finding
@@ -249,6 +265,10 @@ The reported bot behaviour included:
 - receiving command-and-control instructions;
 - several DoS attack variations;
 - remote command execution.
+
+![Rhombus research showing the local listener and C2 callback](07-rhombus-callback-ip.png)
+
+*Evidence: the research records TCP/12645 as the local listener and `209.126.69[.]167:2020` as the callback destination.*
 
 The reported persistence location was:
 
@@ -304,6 +324,10 @@ An important observation was that the event with fewer attributes gave me the re
 
 That became a useful lesson in intelligence triage: the largest event is not automatically the most useful event for the question being asked.
 
+![MISP MiVoice search showing a 61-attribute event and a 17-attribute event](09-mivoice-event-comparison.png)
+
+*Evidence: the same search returned a dense 61-attribute event and a smaller 17-attribute event, supporting the relevance-over-volume comparison.*
+
 ## Vulnerability finding
 
 The exploited vulnerability was:
@@ -322,6 +346,10 @@ including earlier 14.2 releases.
 
 Mitel subsequently released MiVoice Connect R19.3 to remediate the vulnerability.
 
+![MiVoice remediation guidance and impacted versions](08-mivoice-impacted-versions.png)
+
+*Evidence: the source lists R19.2 SP3 and earlier and R14.x and earlier as impacted, with R19.3 as the fixed release.*
+
 ## Persistence finding
 
 The Arctic Wolf report linked from MISP described a webshell used for persistence:
@@ -334,9 +362,17 @@ SHA256: 07838ac8fd5a59bb741aae0cf3abf48296677be7ac0864c4f124c2e168c0af94
 
 The webshell accepted a command through a POST request and decoded the supplied value from three layers of Base64 before execution.
 
+![Arctic Wolf persistence evidence showing the MiVoice webshell filename and hash](10-mivoice-webshell-artifact.png)
+
+*Evidence: the report shows `pdf_import_export.php`, its SHA-256 value and the triple-Base64 command-decoding logic.*
+
 The report described attackers returning roughly a month after the initial compromise, interacting with the webshell, establishing reverse-shell/tunnelling activity with Chisel and moving further into the victim environment.
 
 MISP's Lorenz ransomware Galaxy described the group as active since at least February 2021.
+
+![MISP Lorenz ransomware galaxy record](11-lorenz-ransomware-galaxy.png)
+
+*Evidence: the galaxy record identifies Lorenz as a ransomware group active since at least February 2021.*
 
 ## Operational meaning
 
