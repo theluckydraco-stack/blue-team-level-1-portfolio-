@@ -167,7 +167,9 @@ The ATT&CK Matrix highlighted techniques under:
 - Privilege Escalation
 - Collection
 
-![MISP ATT&CK matrix showing highlighted Turla techniques](attack-matrix.jpg)
+![MISP ATT&CK matrix showing highlighted Turla techniques](03-turla-attack-matrix.png)
+
+*Evidence: MISP maps Component Object Model Hijacking to Persistence and Privilege Escalation, and Email Collection to Collection.*
 
 The event included behaviours such as Component Object Model Hijacking and Email Collection.
 
@@ -176,6 +178,10 @@ I then used the Turla relationship to identify 16 associated MISP events and ope
 ```text
 Save the Date G20 Digital Economy Taskforce 23 24 October.pdf
 ```
+
+![MISP attribute showing the Turla decoy document name](05-turla-decoy-document.png)
+
+*Evidence: the filtered filename attribute identifies the benign-looking PDF decoy used in the phishing event.*
 
 ## Operational meaning
 
