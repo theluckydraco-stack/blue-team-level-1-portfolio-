@@ -515,7 +515,7 @@ The lab demonstrated a complete defensive CTI thought process:
 
 > **Given a possible incident or security concern, locate relevant intelligence in MISP, determine what it means in context, validate it, and translate it into concrete defensive action.**
 
-The value was not the twelve lab answers. The value was learning how to move from **external intelligence -> internal investigation -> defensive decision**.
+The practical value was learning how to move from **external intelligence -> internal investigation -> defensive decision**.
 
 This experience also provides the MISP component for my broader financial-sector threat-informed detection work, where MISP can serve as an intelligence input layer for ATT&CK mapping, telemetry selection and validated SIEM detection development.
 
