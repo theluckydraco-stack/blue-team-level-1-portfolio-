@@ -6,6 +6,14 @@ The work focuses on turning public reporting and technical evidence into intelli
 
 ## Projects
 
+### Financial-Sector Threat Intelligence Sources
+
+This concise research note compares sector-sharing communities, public technical sources and commercial providers by the operational intelligence requirement each one supports. It covers peer financial-sector reporting, exploited vulnerabilities, adversary behaviour, technical indicators, payment fraud, compromised credentials and underground activity, then recommends layered combinations for a small fintech, a payment-heavy fintech or processor, and a mature bank.
+
+The central selection principle is to use the smallest source collection that repeatedly changes a defensive or fraud decision, rather than measuring value by feed volume.
+
+[View Financial-Sector Threat Intelligence Sources](financial-sector-threat-intelligence-sources/README.md)
+
 ### MISP Threat Intelligence Platform Lab
 
 This project demonstrates how I would use MISP when a security question or suspected incident needs threat-intelligence context.

@@ -17,7 +17,7 @@ Each project documents the objective, tools used, investigation process, finding
 | Domain | Projects | Status |
 |---|---|---|
 | [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
-| [Threat Intelligence](threat-intelligence/README.md) | [MISP Threat Intelligence Platform Lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md), [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **MISP lab completed; financial detection validation next** |
+| [Threat Intelligence](threat-intelligence/README.md) | [Financial-Sector Threat Intelligence Sources](threat-intelligence/financial-sector-threat-intelligence-sources/README.md), [MISP Threat Intelligence Platform Lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md), [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Source research and MISP lab completed; financial detection validation next** |
 | Digital Forensics | Projects to be added | In progress |
 | SIEM | Projects to be added | In progress |
 | Incident Response | Projects to be added | In progress |
