@@ -115,3 +115,7 @@ Choose the broad platform according to the bank's technology stack, priority act
 ## Selection principle
 
 The best combination is not the one with the most indicators. It is the smallest collection that repeatedly produces relevant, timely and sufficiently contextual intelligence—and has a named team able to act on it.
+
+## Why I made this
+
+After completing the threat-intelligence module during my BTL1 training, I wanted a practical reference I could return to when deciding which sources would be useful in a financial-sector environment. I created this list for that personal purpose, but I am sharing it because it may also help other learners and early-career defenders understand where each source fits—and why collecting more feeds is not the same as producing useful intelligence.
