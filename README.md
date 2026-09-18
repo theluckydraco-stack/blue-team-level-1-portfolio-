@@ -18,11 +18,19 @@ Each project documents the objective, tools used, investigation process, finding
 |---|---|---|
 | [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
 | [Threat Intelligence](threat-intelligence/README.md) | [Financial-Sector Threat Intelligence Sources](threat-intelligence/financial-sector-threat-intelligence-sources/README.md), [MISP Threat Intelligence Platform Lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md), [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Source research and MISP lab completed; financial detection validation next** |
-| Digital Forensics | Projects to be added | In progress |
+| [Digital Forensics](digital-forensics/README.md) | [Forensic Evidence Acquisition and Recovery](digital-forensics/forensic-evidence-acquisition-and-recovery/README.md) | **First operational project published; Windows artifact reconstruction in progress** |
 | SIEM | Projects to be added | In progress |
 | Incident Response | Projects to be added | In progress |
 
 ## Current Portfolio Work
+
+### Forensic Evidence Acquisition and Recovery
+
+I combined multiple Digital Forensics exercises into one evidence-handling workflow focused on a practical question: **how can an examiner acquire, verify, classify, and examine digital evidence, then recover deleted content while preserving the limits of each method?**
+
+The project covers whole-memory acquisition, process-specific memory capture, E01 disk imaging and verification, targeted KAPE collection, filesystem identification, metadata extraction, file carving, and cryptographic hashing. It also documents what the retained evidence does not prove, including gaps in source hashing, chain of custody, and independent verification.
+
+[View the Digital Forensics project](digital-forensics/forensic-evidence-acquisition-and-recovery/README.md)
 
 ### MISP Threat Intelligence Platform Lab
 
