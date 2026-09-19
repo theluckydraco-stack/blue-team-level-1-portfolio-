@@ -1,182 +1,204 @@
 # Forensic Evidence Acquisition and Recovery
 
-## Objective
+## Investigative Question
 
-This project combines several controlled digital-forensics exercises into one operational workflow:
+**How can an examiner acquire evidence at the appropriate scope, verify what was collected, identify its structure, and recover useful content while preserving the limits of each method?**
 
-> **How can an examiner acquire, verify, classify, and examine digital evidence, then recover deleted content while preserving the limits of each method?**
+This project consolidates several controlled digital-forensics exercises into one evidence-handling workflow. The emphasis is on method selection, integrity, recovery, and defensible interpretation rather than reproducing individual lab tasks.
 
-The work focuses on evidence acquisition and recovery rather than on reproducing individual course labs.
+## Evidence and Scope
 
-## Scope
+The work covered several separate training evidence sources and acquisition scopes:
 
-The workflow covers four acquisition and examination stages:
+- whole-system volatile memory;
+- one selected process;
+- a physical disk acquired as E01;
+- targeted live/remote Windows artifacts with KAPE;
+- supplied filesystem images used for classification and carving;
+- document and image files used for metadata analysis.
 
-1. **Acquire evidence at the right scope** — whole-system memory, one process, a physical disk image, or a targeted artifact collection.
-2. **Verify and identify the evidence** — use acquisition verification and filesystem classification before deeper analysis.
-3. **Examine metadata and deleted content** — extract file metadata and recover content from raw storage when normal filesystem references are insufficient.
-4. **Hash evidence and recovered artifacts** — use cryptographic digests as stable identifiers and integrity checks.
+These sources are **not presented as one incident**. They demonstrate complementary forensic methods.
 
-All activity was performed in controlled training environments.
+## Tools
 
-## Tools Used
-
-- **FTK Imager 4.5.0.3** — whole-memory capture, physical-disk imaging, filesystem inspection, image verification
+- **FTK Imager 4.5.0.3** — memory capture, physical-disk imaging, image verification, filesystem inspection
 - **ProcDump 11.0** — process-specific memory capture
-- **KAPE 1.2.0.0** — rapid targeted artifact acquisition from a live/remote Windows host
+- **KAPE 1.2.0.0** — targeted artifact collection
 - **ExifTool 12.80** — embedded metadata extraction
 - **Scalpel 1.60** — signature-based file carving
-- **PowerShell / Linux hashing utilities** — MD5, SHA-1, and SHA-256 generation for training and comparison
+- **Linux / PowerShell hashing utilities** — MD5, SHA-1, and SHA-256 where required
 
-## Workflow
+## Investigative Workflow
 
 ```text
-Evidence source
-    ↓
+Identify the evidence question
+        ↓
 Choose acquisition scope
-    ├── Whole RAM
-    ├── Single process
-    ├── Physical disk
-    └── Targeted KAPE collection
-    ↓
+        ├── whole RAM
+        ├── single process
+        ├── physical disk
+        └── targeted artifacts
+        ↓
 Verify acquisition where supported
-    ↓
-Identify filesystem
-    ↓
-Inspect metadata / filesystem structures
-    ↓
-Recover deleted content where justified
-    ↓
+        ↓
+Identify filesystem / evidence structure
+        ↓
+Examine metadata and allocated content
+        ↓
+Recover deleted/non-obvious content where justified
+        ↓
 Hash outputs
-    ↓
-Document findings, limits, and next actions
+        ↓
+Document observations, limits, and next actions
 ```
 
-## 1. Acquisition
+## Findings and Operational Interpretation
 
-The acquisition exercise demonstrated four different collection scopes.
+### 1. Acquisition scope should match the question
 
-### Whole-system memory
+Whole-memory acquisition preserves broad volatile state. A process dump narrows collection to one process when a PID-level lead already exists. A physical image preserves persistent disk evidence. KAPE provides rapid targeted collection when speed or remote triage matters.
 
-FTK Imager was used to capture a live memory image from the analysis host. This preserves broad volatile state for later memory analysis.
-
-### Process-specific memory
-
-ProcDump was used with a selected PID to create a full dump of one process. This demonstrates a narrower collection method when an analyst already has a process-level lead.
-
-### Physical disk imaging
-
-FTK Imager was used to acquire a secondary physical drive into an E01 forensic image. The acquisition workflow produced matching internal verification records and reported no bad blocks.
-
-### Targeted remote collection
-
-KAPE was used on a remote Windows host to collect selected browser artifacts. This demonstrated fast triage collection while a full image may be unnecessary or still pending.
-
-## 2. Filesystem Identification
-
-Before examining file-level evidence, FTK Imager was used to identify the filesystem structures of supplied disk images.
-
-Observed classifications included:
-
-- NTFS
-- FAT32
-- Ext3
-
-The operational purpose was not merely to name the filesystem. The filesystem determines which metadata structures, allocation mechanisms, deleted-file records, and recovery approaches are available during later examination.
-
-## 3. Metadata and File Carving
-
-ExifTool was used to inspect embedded metadata from document and image evidence.
-
-Scalpel was then configured to search a disk image for known file signatures and successfully recover a deleted JPEG.
-
-This demonstrated an important distinction:
-
-- **Metadata analysis** provides context about an accessible file.
-- **File carving** attempts to recover content from raw storage when the filesystem no longer provides a reliable reference.
-
-Carving can recover file content without necessarily recovering the original filename, directory, ownership, or filesystem timestamps.
-
-## 4. Hashing and Integrity
-
-The exercises used MD5, SHA-1, and SHA-256 to demonstrate how exact input bytes map to repeatable digests.
-
-The operational model is:
+Operationally:
 
 ```text
-Acquisition / evidence
-      ↓
-Generate reference digest
-      ↓
-Later verification
-      ↓
-Compare
+Full image
+→ breadth
 
-Match
-→ supports byte-for-byte consistency
+Targeted collection
+→ speed
 
-Mismatch
-→ investigate alteration, corruption, or acquisition error
+Neither automatically replaces the other.
 ```
 
-SHA-256 is treated as the preferred modern security-relevant digest. MD5 and SHA-1 were retained where required by the training workflow or tool compatibility.
+### 2. Acquisition verification matters
 
-## Findings and Operational Lessons
+The E01 workflow produced matching internal verification hashes and reported no bad blocks.
 
-### Acquisition scope should match the evidence question
+A matching verification digest supports byte-for-byte consistency of the acquired evidence data. It does **not** prove that the original source was authentic, that every earlier handling step was correct, or that chain of custody was complete.
 
-A full disk image is not always the first or fastest answer. Volatile memory may disappear first, a process dump may preserve a focused lead, and targeted KAPE collection can provide rapid triage artifacts.
+### 3. Filesystem identification determines the examination strategy
 
-### Filesystem identification is a scoping step
+Supplied images were parsed as NTFS, FAT32, and Ext3.
 
-Knowing whether evidence is NTFS, FAT32, or Ext3 determines the structures and recovery methods an examiner should expect.
+That classification matters because the filesystem determines which metadata structures, allocation records, deleted-file mechanisms, and recovery approaches are available.
 
-### File carving recovers content, not necessarily context
+### 4. Metadata provides leads, not attribution
 
-A carved file can be valuable even when filesystem metadata is gone, but it may lose its original name, path, ownership, and timestamps.
+ExifTool exposed embedded metadata from supplied files.
 
-### Hashes support integrity, not truthfulness
+Metadata can support questions about document authorship fields, software, timestamps, or device information, but those values can be edited, copied, stripped, or inherited. They are evidence to corroborate, not identity proof.
 
-A matching digest supports that the measured bytes stayed the same. It does not prove that the original content was authentic or that the acquisition source was trustworthy.
+### 5. File carving can recover content after filesystem references are lost
 
-### Triage acquisition does not replace comprehensive acquisition
+Scalpel recovered JPEG content by scanning raw image data for configured signatures.
 
-KAPE is useful for collecting high-value artifacts quickly, but targeted collection can miss evidence outside the selected targets. A full image may still be required for a broader investigation.
+Carving is useful when directory records are deleted or unavailable, but the recovered file may lose:
+
+- original filename;
+- path;
+- ownership;
+- filesystem timestamps;
+- complete fragmentation context.
+
+### 6. Hashes identify bytes; they do not validate meaning
+
+The exercises used MD5, SHA-1, and SHA-256 to show how exact byte sequences produce repeatable digests.
+
+For current integrity and identification work, SHA-256 is the preferred primary digest. Legacy hashes may still appear in older tools, labs, and comparison datasets.
+
+```text
+matching hash
+→ same measured bytes
+
+matching hash
+≠ authentic source
+≠ truthful content
+```
+
+## Evidence Screenshots
+
+Selected screenshots show tool execution and forensic output. Course answer screens are excluded.
+
+### Whole-memory acquisition
+
+![FTK Imager live-memory acquisition](images/ftk-memory-capture.png)
+
+### Process-specific acquisition
+
+![ProcDump process-memory capture](images/procdump-process-capture.png)
+
+### E01 imaging configuration
+
+![FTK Imager E01 destination settings](images/e01-destination-settings.png)
+
+### Metadata examination
+
+![ExifTool metadata output](images/exiftool-metadata.png)
+
+### File carving
+
+![Scalpel file-carving output](images/scalpel-file-carving.png)
+
+### Hash generation
+
+![MD5 SHA-1 and SHA-256 output](images/hash-output.png)
 
 ## Evidence Boundaries and Limitations
 
 This was a controlled training workflow, not a production forensic case.
 
-The retained evidence supports the acquisition and examination methods described above, but several limitations remain:
+The retained evidence has several limitations:
 
-- no complete external chain-of-custody record was available;
+- the separate exercises used different evidence sources;
+- a complete external chain-of-custody record was not available;
 - write-blocker use was not independently documented for every source;
 - SHA-256 was not recorded for every acquisition output;
-- the underlying memory dump, process dump, E01 segments, and all parser exports were not retained in this repository;
-- some earlier disk images lacked source/acquisition hashes;
-- acquisition verification demonstrates consistency of the collected image, not authenticity of the source device;
-- screenshots and lab outputs demonstrate method execution but do not independently establish incident conclusions.
+- complete raw acquisitions and all parser exports are not stored in this repository;
+- targeted KAPE collection can miss evidence outside selected targets;
+- carved content may lack original filesystem context;
+- screenshots demonstrate method execution but do not independently establish incident conclusions.
 
-These limits are intentionally documented rather than hidden.
+## Production Follow-Up
+
+In a real case I would:
+
+- record source-device identifiers and acquisition circumstances;
+- preserve source and verification hashes using a modern digest;
+- retain complete tool logs and manifests;
+- document write-blocker status and custody transfers;
+- keep originals secured and analyse verified copies;
+- validate recovered content with filesystem metadata where possible;
+- correlate volatile, disk, and targeted artifacts before reporting conclusions.
+
+## Interview Discussion Points
+
+This project gives me concrete examples for discussing:
+
+- when to prioritize RAM over disk;
+- when targeted triage is appropriate and when a full image is still needed;
+- why acquisition verification is different from chain of custody;
+- why file carving recovers content but often loses context;
+- why metadata and hashes must be interpreted within evidentiary limits;
+- how to select a collection method based on the investigative question.
 
 ## Skills Demonstrated
 
 - forensic acquisition planning
-- live memory acquisition
+- live-memory acquisition
 - process-specific memory capture
 - physical-disk imaging
-- E01 image verification
-- remote artifact triage with KAPE
+- E01 verification
+- targeted Windows artifact collection
 - filesystem identification
 - metadata extraction
 - deleted-file carving
 - cryptographic hashing
 - evidence-integrity reasoning
-- distinguishing observation from interpretation
+- observation-versus-interpretation discipline
 - documenting limitations and next justified actions
 
-## Next Steps
+## References
 
-The next Digital Forensics project will focus on **Windows Endpoint Artifact Reconstruction**, correlating LNK files, Prefetch, Jump Lists, browser artifacts, Recycle Bin metadata, and authentication evidence into endpoint activity timelines.
-
-That project will be published only after the supporting Windows evidence is complete enough to support a coherent investigation rather than a collection of isolated lab answers.
+- SWGDE publications: https://www.swgde.org/documents/published/
+- FTK Imager product information: https://www.exterro.com/digital-forensics-software/ftk-imager
+- KAPE: https://www.kroll.com/en/insights/publications/cyber/kroll-artifact-parser-extractor-kape
