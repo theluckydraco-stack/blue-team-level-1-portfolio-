@@ -18,11 +18,19 @@ Each project documents the objective, tools used, investigation process, finding
 |---|---|---|
 | [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
 | [Threat Intelligence](threat-intelligence/README.md) | [Financial-Sector Threat Intelligence Sources](threat-intelligence/financial-sector-threat-intelligence-sources/README.md), [MISP Threat Intelligence Platform Lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md), [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Source research and MISP lab completed; financial detection validation next** |
-| [Digital Forensics](digital-forensics/README.md) | [Forensic Evidence Acquisition and Recovery](digital-forensics/forensic-evidence-acquisition-and-recovery/README.md) | **First operational project published; Windows artifact reconstruction in progress** |
+| [Digital Forensics](digital-forensics/README.md) | [Forensic Evidence Acquisition and Recovery](digital-forensics/forensic-evidence-acquisition-and-recovery/README.md), [Memory-Based Incident Triage with Volatility](digital-forensics/memory-based-incident-triage/README.md) | **Two operational projects published; Windows artifact reconstruction in progress** |
 | SIEM | Projects to be added | In progress |
 | Incident Response | Projects to be added | In progress |
 
 ## Current Portfolio Work
+
+### Memory-Based Incident Triage with Volatility
+
+I completed a memory-forensics workflow using both the legacy Volatility 2 approach and Volatility 3 through Workbench.
+
+The project focuses on the operational progression from system and process identification to parent-child analysis, command-line context, network pivots, process privileges, artifact extraction, and hashing. It deliberately separates observed evidence from conclusions: an unusual process relationship, network endpoint, or token privilege is treated as a lead that requires corroboration rather than automatic proof of malware.
+
+[View the Memory-Based Incident Triage project](digital-forensics/memory-based-incident-triage/README.md)
 
 ### Forensic Evidence Acquisition and Recovery
 
