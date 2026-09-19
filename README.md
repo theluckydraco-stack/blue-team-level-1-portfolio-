@@ -19,10 +19,18 @@ Each project documents the objective, tools used, investigation process, finding
 | [Phishing Analysis](phishing-analysis/README.md) | [Manual Artifact Extraction](phishing-analysis/manual-artifact-extraction/README.md), [Investigating an Attachment](phishing-analysis/investigating-an-attachment/README.md), [Phishing Response Challenge](phishing-analysis/phishing-response-challenge/README.md) | **Completed** |
 | [Threat Intelligence](threat-intelligence/README.md) | [Financial-Sector Threat Intelligence Sources](threat-intelligence/financial-sector-threat-intelligence-sources/README.md), [MISP Threat Intelligence Platform Lab](threat-intelligence/misp-threat-intelligence-platform-lab/README.md), [Digital Financial Services Threat Landscape](threat-intelligence/financial-sector-threat-landscape/README.md) | **Source research and MISP lab completed; financial detection validation next** |
 | [Digital Forensics](digital-forensics/README.md) | [Forensic Evidence Acquisition and Recovery](digital-forensics/forensic-evidence-acquisition-and-recovery/README.md), [Memory-Based Incident Triage with Volatility](digital-forensics/memory-based-incident-triage/README.md) | **Two operational projects published; Windows artifact reconstruction in progress** |
-| SIEM | Projects to be added | In progress |
+| [SIEM](siem/README.md) | [Windows Security Event Account-Activity Investigation](siem/windows-event-log-account-activity-investigation/README.md) | **First operational SIEM investigation published; Splunk and detection work in progress** |
 | Incident Response | Projects to be added | In progress |
 
 ## Current Portfolio Work
+
+### Windows Security Event Account-Activity Investigation
+
+I completed a Windows Security event investigation focused on reconstructing account creation, local-group membership changes, and a subsequent privileged logon.
+
+The project uses Event IDs 4720, 4732, 4624, and 4672 as investigative entry points, but the core skill is correlation: using a **SID** to follow the same security principal across account and group-management events, and a **Logon ID** to follow one specific session across related logon and privilege events. The write-up explicitly separates recorded activity from conclusions that would require additional endpoint, identity, or network telemetry.
+
+[View the Windows Security Event investigation](siem/windows-event-log-account-activity-investigation/README.md)
 
 ### Memory-Based Incident Triage with Volatility
 
