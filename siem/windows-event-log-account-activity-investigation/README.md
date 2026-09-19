@@ -157,6 +157,30 @@ That distinction is transferable to real Windows investigations.
 
 These identifiers are useful because they answer different investigative questions. The analyst still has to correlate fields, time, identity, and surrounding activity.
 
+## Evidence Screenshots
+
+Selected screenshots show the analyst-visible Windows Security evidence used to reconstruct the sequence. Course question/answer screens are excluded.
+
+### First privileged logon evidence
+
+![Event 4672 special privileges assigned](images/first-special-logon.png)
+
+### Account creation
+
+![Event 4720 user account creation](images/account-created-4720.png)
+
+### Group-management sequence
+
+![Chronological account and group-management events](images/group-management-sequence.png)
+
+### Group membership correlation
+
+![Event 4732 group membership evidence](images/group-memberships.png)
+
+### Subsequent privileged logon
+
+![SteveE successful privileged logon sequence](images/stevee-privileged-logon.png)
+
 ## Operational Interpretation
 
 The strongest result was not any individual Event ID. It was the reconstructed sequence:
