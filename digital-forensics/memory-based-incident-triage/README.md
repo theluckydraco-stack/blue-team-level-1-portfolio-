@@ -107,6 +107,43 @@ Token inspection shows what a process may be allowed to do. It does not prove th
 
 Dumping a process is not the end of the investigation. The extracted artifact should be hashed, preserved, and examined with additional static, dynamic, endpoint, and threat-intelligence evidence where appropriate.
 
+
+## Evidence Screenshots
+
+The screenshots below are selected tool-output evidence from the completed exercises. They show the actual analysis workflow without reproducing course question or solution pages.
+
+### Volatility 2 — image identification
+
+![Volatility 2 imageinfo output showing the suggested profile](images/volatility2-imageinfo-profile.png)
+
+### Volatility 2 — process relationship triage
+
+![Volatility 2 pstree output used to examine an unusual process chain](images/volatility2-pstree-process-chain.png)
+
+### Volatility 2 — process-to-network pivot
+
+![Volatility 2 netscan output associating a process with a remote endpoint](images/volatility2-netscan-process-endpoint.png)
+
+### Volatility 2 — extracted process hashes
+
+![Hashing output for the process artifact extracted from memory](images/volatility2-process-dump-hashes.png)
+
+### Volatility 3 — system information
+
+![Volatility 3 Workbench windows.info output](images/volatility3-windows-info.png)
+
+### Volatility 3 — PowerShell parent-child relationship
+
+![Volatility 3 Workbench pstree output for the selected PowerShell process](images/volatility3-pstree-powershell.png)
+
+### Volatility 3 — process-token privileges
+
+![Volatility 3 Workbench privileges output for the selected process](images/volatility3-process-privileges.png)
+
+### Volatility 3 — command-line context
+
+![Volatility 3 Workbench cmdline output for the selected process](images/volatility3-cmdline.png)
+
 ## Evidence Boundaries and Limitations
 
 This project is based on separate controlled training images and should not be read as one incident timeline.
